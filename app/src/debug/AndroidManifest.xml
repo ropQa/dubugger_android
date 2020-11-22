@@ -2,5 +2,6 @@
     package="com.renkataoka.dubugger">
 
     <application>
+        <activity android:name=".module.main.view.MainActivityWithMock" />
     </application>
 </manifest>

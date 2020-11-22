@@ -9,6 +9,7 @@ public class MainContract {
     }
 
     public interface View extends com.renkataoka.viper.View {
+        void initRecyclerView();
     }
 
     public interface Interactor extends com.renkataoka.viper.Interactor {

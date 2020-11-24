@@ -1,5 +1,9 @@
 package com.renkataoka.dubugger.module.main.interactor;
 
+import android.content.Context;
+
+import com.renkataoka.dubugger.datamanager.ToDebugItemsDataManager;
+import com.renkataoka.dubugger.entity.ToDebugItems;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.viper.InteractorCallback;
 
@@ -14,9 +18,16 @@ public class MainInteractor implements MainContract.Interactor {
     private MainContract.InteractorCallback callback;
 
     /**
-     * コンストラクタ
+     * ToDebugItemsのDataManagerクラスのオブジェクト。
      */
-    public MainInteractor() {
+    private ToDebugItemsDataManager dataManager;
+
+    public MainInteractor(Context context) {
+        dataManager = createDataManager(context);
+    }
+
+    ToDebugItemsDataManager createDataManager(Context context) {
+        return new ToDebugItemsDataManager(context);
     }
 
     @Override
@@ -29,5 +40,31 @@ public class MainInteractor implements MainContract.Interactor {
     @Override
     public void onDisassemble() {
         callback = null;
+    }
+
+    /**
+     * to_debug_itemsテーブルにToDebugItemを追加する。
+     *
+     * @param content アイテムの中身
+     */
+    @Override
+    public void addToDebugItem(String content) {
+        if (content.length() != 0) {
+            ToDebugItems item = new ToDebugItems();
+            item.setContent(content);
+            dataManager.insert(item);
+        }
+    }
+
+    /**
+     * 指定されたToDebugItemを削除する。
+     *
+     * @param id 削除対象アイテムのID
+     */
+    @Override
+    public void deleteToDebugItem(int id) {
+        if (id > 0) {
+            dataManager.delete(id);
+        }
     }
 }

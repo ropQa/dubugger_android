@@ -5,6 +5,8 @@ package com.renkataoka.dubugger.module.main.contract;
  * Contractは中継用プロトコルであり、各コンポーネントに実装すべきメソッドを提供する。
  */
 public class MainContract {
+    public static final int REQUEST_CODE = 100;//MainActivityからRubberDuckActivityを開始するためのリクエストコード。
+
     private MainContract() {
     }
 
@@ -21,5 +23,6 @@ public class MainContract {
     }
 
     public interface Router extends com.renkataoka.viper.Router {
+        void startRubberDuckActivity();
     }
 }

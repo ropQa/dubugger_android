@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import com.renkataoka.dubugger.R;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
@@ -72,6 +74,21 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void beginDisassembleModules() {
         if (presenter != null) {
             presenter.disassembleModules();
+        }
+    }
+
+    /**
+     * Addボタンをクリックされたら、EditText内の文言をpresenterに伝える。
+     *
+     * @param view Addボタン
+     */
+    public void onAddButtonClicked(View view) {
+        EditText editText = findViewById(R.id.editTextToDebugItem);
+        String inputContent = editText.getText().toString();
+        if (inputContent.length() != 0) {
+            if (presenter != null) {
+                presenter.onAddButtonClicked(inputContent);
+            }
         }
     }
 }

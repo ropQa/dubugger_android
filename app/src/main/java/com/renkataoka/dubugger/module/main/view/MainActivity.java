@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.renkataoka.dubugger.R;
+import com.renkataoka.dubugger.module.main.assembler.MainAssembler;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 
 import java.util.LinkedList;
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public MainContract.Presenter beginAssembleModules(Context context) {
-        return null;
+        MainAssembler assembler = new MainAssembler();
+        return assembler.assembleModules(context);
     }
 
     @Override

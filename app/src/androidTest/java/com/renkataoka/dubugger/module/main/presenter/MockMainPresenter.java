@@ -17,4 +17,13 @@ public class MockMainPresenter implements MainContract.Presenter {
     public int getCountDisassembleModules() {
         return counter.getCount("disassembleModules");
     }
+
+    @Override
+    public void onAddButtonClicked(String inputItem) {
+        counter.increment("onAddButtonClicked");
+    }
+
+    public int getCountOnAddButtonClicked() {
+        return counter.getCount("onAddButtonClicked");
+    }
 }

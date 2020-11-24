@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Dubugger</string>
+    <string name="hint_toDebugItem">Enter what you figure out.</string>
+    <string name="buttonAddToDebugItem">Add</string>
 </resources>

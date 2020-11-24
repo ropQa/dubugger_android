@@ -26,10 +26,49 @@ public class ToDebugItems {
 
     /**
      * コンストラクタ
-     * @param content 入力されたアイテムの文言。
      */
-    public ToDebugItems(String content) {
-        this.content = content;
+    public ToDebugItems() {
         this.createdAt = System.currentTimeMillis();
+        this.id = 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Long createdAt) {
+        this.createdAt = createdAt;
     }
 }

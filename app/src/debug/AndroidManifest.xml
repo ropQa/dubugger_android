@@ -2,6 +2,7 @@
     package="com.renkataoka.dubugger">
 
     <application>
+        <activity android:name=".module.main.router.MainRouterTest$MockActivity" />
         <activity android:name=".module.rubberduck.view.RubberDuckActivityWithMock" />
     </application>
 </manifest>

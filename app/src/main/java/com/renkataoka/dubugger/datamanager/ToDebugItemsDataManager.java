@@ -45,6 +45,17 @@ public class ToDebugItemsDataManager {
     }
 
     /**
+     * 単体テスト用のコンストラクタ
+     * TODO コンストラクタにApplicationを渡さない実装 or Viewを利用する単体テスト。
+     *
+     * @param db
+     */
+    ToDebugItemsDataManager(DubuggerRoomDatabase db) {
+        itemsDao = db.toDebugItemsDao();
+        allItems = itemsDao.loadAllItems();
+    }
+
+    /**
      * 全てのアイテムを取得する。
      *
      * @return ToDebugItems内の全てのアイテム

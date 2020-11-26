@@ -4,7 +4,6 @@ import android.content.Context;
 
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
-import androidx.lifecycle.LiveData;
 
 import com.renkataoka.dubugger.db.DubuggerRoomDatabase;
 import com.renkataoka.dubugger.entity.ToDebugItems;
@@ -29,9 +28,9 @@ public class ToDebugItemsDataManager {
     private ToDebugItemsDao itemsDao;
 
     /**
-     * Itemsの全アイテムを取得するLiveDataクラスのオブジェクト。
+     * Itemsの全アイテムを取得するList型オブジェクト。
      */
-    private LiveData<List<ToDebugItems>> allItems;
+    private List<ToDebugItems> allItems;
 
     /**
      * コンストラクタ
@@ -60,7 +59,7 @@ public class ToDebugItemsDataManager {
      *
      * @return ToDebugItems内の全てのアイテム
      */
-    public LiveData<List<ToDebugItems>> getAllItems() {
+    public List<ToDebugItems> getAllItems() {
         return allItems;
     }
 

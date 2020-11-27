@@ -28,7 +28,7 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
     }
 
     /**
-     * Addボタンをクリックされたら、interactorにアイテム追加を支持する。
+     * Addボタンをクリックされたら、interactorにアイテム追加を指示する。
      *
      * @param inputContent 入力されたコンテンツ
      */

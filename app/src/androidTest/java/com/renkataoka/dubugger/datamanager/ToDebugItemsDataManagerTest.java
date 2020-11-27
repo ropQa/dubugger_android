@@ -65,6 +65,7 @@ public class ToDebugItemsDataManagerTest {
         ToDebugItems item3 = new ToDebugItems();
         item3.setContent(testText + 3);
         dataManager.insert(item3);
+        Thread.sleep(100);
 
         //Daoを用いて、insertされたアイテムを取得する。
         ToDebugItems insertedItem = itemsDao.getItem(1);
@@ -98,6 +99,7 @@ public class ToDebugItemsDataManagerTest {
         ToDebugItems item3 = new ToDebugItems();
         item1.setContent(testText + 3);
         dataManager.insert(item3);
+        Thread.sleep(100);
 
         dataManager.delete(1);
         //delete処理完了まで待つ。

@@ -49,4 +49,13 @@ public class MockMainInteractor implements MainContract.Interactor {
     public int getCountOnDisassemble() {
         return counter.getCount("onDisassemble");
     }
+
+    @Override
+    public void readToDebugItems() {
+        counter.increment("readToDebugItems");
+    }
+
+    public int getCountReadToDebugItems() {
+        return counter.getCount("readToDebugItems");
+    }
 }

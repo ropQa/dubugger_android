@@ -51,4 +51,11 @@ public class MainPresenterTest {
         assertEquals(1, mockInteractor.getCountOnDisassemble());
         assertEquals(1, mockRouter.getCountOnDisassemble());
     }
+
+    @Test
+    public void onCreate() {
+        presenter.onCreate();
+
+        assertEquals(1, mockInteractor.getCountReadToDebugItems());
+    }
 }

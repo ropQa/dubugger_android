@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = beginAssembleModules(this);
+        if (presenter != null) {
+            presenter.onCreate();
+        }
         initRecyclerView();
     }
 

@@ -22,12 +22,14 @@ public class MainContract {
     public interface Interactor extends com.renkataoka.viper.Interactor {
         void addToDebugItem(String content);
         void deleteToDebugItem(int id);
+        void readToDebugItems();
     }
 
     public interface InteractorCallback extends com.renkataoka.viper.InteractorCallback {
     }
 
     public interface Presenter extends com.renkataoka.viper.Presenter {
+        void onCreate();
         void onAddButtonClicked(String inputContent);
     }
 

@@ -10,10 +10,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.renkataoka.dubugger.R;
+import com.renkataoka.dubugger.entity.ToDebugItems;
 import com.renkataoka.dubugger.module.main.assembler.MainAssembler;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
@@ -23,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private MainContract.Presenter presenter;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-
-    private LinkedList<String> dataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +40,20 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void initRecyclerView() {
         recyclerView = findViewById(R.id.recyclerViewToDebugList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ToDebugListAdapter(setTestDataSet());
+        adapter = new ToDebugListAdapter();
         recyclerView.setAdapter(adapter);
     }
 
     /**
-     * View開発時用のテストデータセットメソッド。
+     * recyclerViewのアダプターにアイテムをセットする。
      *
-     * @return RecyclerView用のdataset。
+     * @param toDebugItems dbから取得したアイテム
      */
-    private LinkedList<String> setTestDataSet() {
-        dataset = new LinkedList<>();
-        return dataset;
+    @Override
+    public void setToDebugItems(List<ToDebugItems> toDebugItems) {
+        if (adapter instanceof ToDebugListAdapter) {
+            ((ToDebugListAdapter) adapter).setToDebugItems(toDebugItems);
+        }
     }
 
     @Override

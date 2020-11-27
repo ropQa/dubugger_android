@@ -1,5 +1,9 @@
 package com.renkataoka.dubugger.module.main.contract;
 
+import com.renkataoka.dubugger.entity.ToDebugItems;
+
+import java.util.List;
+
 /**
  * メイン画面のContractクラス。
  * Contractは中継用プロトコルであり、各コンポーネントに実装すべきメソッドを提供する。
@@ -12,6 +16,7 @@ public class MainContract {
 
     public interface View extends com.renkataoka.viper.View {
         void initRecyclerView();
+        void setToDebugItems(List<ToDebugItems> toDebugItems);
     }
 
     public interface Interactor extends com.renkataoka.viper.Interactor {

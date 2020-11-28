@@ -6,6 +6,8 @@ import com.renkataoka.dubugger.module.main.view.MockMainView;
 
 import org.junit.*;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class MainPresenterTest {
@@ -55,6 +57,20 @@ public class MainPresenterTest {
     @Test
     public void onCreate() {
         presenter.onCreate();
+
+        assertEquals(1, mockInteractor.getCountReadToDebugItems());
+    }
+
+    @Test
+    public void onReadToDebugItems() {
+        presenter.onReadToDebugItems(new ArrayList<>());
+
+        assertEquals(1, mockView.getCountSetToDebugItems());
+    }
+
+    @Test
+    public void onAddToDebugItemCompleted() {
+        presenter.onAddToDebugItemCompleted();
 
         assertEquals(1, mockInteractor.getCountReadToDebugItems());
     }

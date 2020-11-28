@@ -22,4 +22,12 @@ public class MockInteractorCallback implements MainContract.InteractorCallback {
         return counter.getCount("onReadToDebugItems");
     }
 
+    @Override
+    public void onAddToDebugItemCompleted() {
+        counter.increment("onAddToDebugItemCompleted");
+    }
+
+    public int getCountOnAddToDebugItemCompleted() {
+        return counter.getCount("onAddToDebugItemCompleted");
+    }
 }

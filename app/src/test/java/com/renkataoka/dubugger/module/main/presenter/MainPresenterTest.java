@@ -74,4 +74,11 @@ public class MainPresenterTest {
 
         assertEquals(1, mockInteractor.getCountReadToDebugItems());
     }
+
+    @Test
+    public void onClickDeleteAllMenu() {
+        presenter.onClickDeleteAllMenu();
+
+        assertEquals(1, mockInteractor.getCountDeleteAllToDebugItems());
+    }
 }

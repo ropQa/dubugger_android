@@ -75,8 +75,14 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
         }
     }
 
+    /**
+     * ToDebugItemsを全て削除する。
+     */
     @Override
     public void onClickDeleteAllMenu() {
+        if (interactor != null) {
+            interactor.deleteAllToDebugItems();
+        }
     }
 
     /**

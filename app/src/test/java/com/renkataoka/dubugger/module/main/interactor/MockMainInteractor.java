@@ -58,4 +58,13 @@ public class MockMainInteractor implements MainContract.Interactor {
     public int getCountReadToDebugItems() {
         return counter.getCount("readToDebugItems");
     }
+
+    @Override
+    public void deleteAllToDebugItems() {
+        counter.increment("deleteAllToDebugItems");
+    }
+
+    public int getCountDeleteAllToDebugItems() {
+        return counter.getCount("deleteAllToDebugItems");
+    }
 }

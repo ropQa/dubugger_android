@@ -50,12 +50,7 @@ public class MainInteractor implements MainContract.Interactor {
      */
     @Override
     public void readToDebugItems() {
-        List<ToDebugItems> toDebugItems = dataManager.getAllItems();
-        if (toDebugItems != null) {
-            if (callback != null) {
-                callback.onReadToDebugItems(toDebugItems);
-            }
-        }
+        dataManager.getAllItems();
     }
 
     /**
@@ -69,9 +64,6 @@ public class MainInteractor implements MainContract.Interactor {
             ToDebugItems item = new ToDebugItems();
             item.setContent(content);
             dataManager.insert(item);
-            if (callback != null) {
-                callback.onAddToDebugItemCompleted();
-            }
         }
     }
 

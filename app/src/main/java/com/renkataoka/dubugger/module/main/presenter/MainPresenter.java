@@ -67,7 +67,7 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
      * @param toDebugItems
      */
     @Override
-    public void onReadToDebugItems(List<ToDebugItems> toDebugItems) {
+    public void onReadToDebugItemsCompleted(List<ToDebugItems> toDebugItems) {
         if (toDebugItems != null) {
             if (view != null) {
                 view.setToDebugItems(toDebugItems);

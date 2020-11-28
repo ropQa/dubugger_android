@@ -153,6 +153,7 @@ public class ToDebugItemsDataManager {
             public void handleMessage(@NonNull Message msg) {
                 if (msg.obj != null) {
                     allItems = (List<ToDebugItems>) msg.obj;
+                    callback.onReadToDebugItemsCompleted(allItems);
                 }
             }
         };

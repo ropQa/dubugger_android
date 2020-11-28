@@ -7,6 +7,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.renkataoka.dubugger.db.DubuggerRoomDatabase;
 import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.module.main.interactor.MockInteractorCallback;
 
 import org.junit.*;
 
@@ -31,17 +32,33 @@ public class ToDebugItemsDataManagerTest {
      */
     private ToDebugItemsDataManager dataManager;
 
+    /**
+     * MainモジュールのInteractorCallbackのMockクラス。
+     */
+    private MockInteractorCallback callback;
+
     @Before
     public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, DubuggerRoomDatabase.class).build();
         itemsDao = db.toDebugItemsDao();
         dataManager = new ToDebugItemsDataManager(db);
+        callback = new MockInteractorCallback();
+        dataManager.setCallback(callback);
+        initMock();
     }
 
     @After
     public void tearDown() {
+        initMock();
         db.close();
+    }
+
+    private void initMock() {
+        callback.clear();
+
+        assertEquals(0, callback.getCountOnAddToDebugItemCompleted());
+        assertEquals(0, callback.getCountOnDeleteToDebugItemCompleted());
     }
 
     @Test
@@ -54,18 +71,21 @@ public class ToDebugItemsDataManagerTest {
         dataManager.insert(item);
         //insert処理完了まで待つ。
         Thread.sleep(100);
+        assertEquals(1, callback.getCountOnAddToDebugItemCompleted());
 
         //2つ目のアイテム
         String string_2 = "Content 2";
         item.setContent(string_2);
         dataManager.insert(item);
         Thread.sleep(100);
+        assertEquals(2, callback.getCountOnAddToDebugItemCompleted());
 
         //3つ目のアイテム
         String string_3 = "Content 3";
         item.setContent(string_3);
         dataManager.insert(item);
         Thread.sleep(100);
+        assertEquals(3, callback.getCountOnAddToDebugItemCompleted());
 
         //Daoを用いて、insertされたアイテムを取得する。
         ToDebugItems insertedItem = itemsDao.getItem(1);
@@ -85,25 +105,26 @@ public class ToDebugItemsDataManagerTest {
         //新しくアイテムを作り、insertする。
         String string_1 = "Content 1";
         item.setContent(string_1);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         //insert処理完了まで待つ。
         Thread.sleep(100);
 
         //2つ目のアイテム
         String string_2 = "Content 2";
         item.setContent(string_2);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         Thread.sleep(100);
 
         //3つ目のアイテム
         String string_3 = "Content 3";
         item.setContent(string_3);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         Thread.sleep(100);
 
         dataManager.delete(1);
         //delete処理完了まで待つ。
         Thread.sleep(100);
+        assertEquals(1, callback.getCountOnDeleteToDebugItemCompleted());
         assertNull(itemsDao.getItem(1));
         assertNotNull(itemsDao.getItem(2));
         assertNotNull(itemsDao.getItem(3));
@@ -116,25 +137,26 @@ public class ToDebugItemsDataManagerTest {
         //新しくアイテムを作り、insertする。
         String string_1 = "Content 1";
         item.setContent(string_1);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         //insert処理完了まで待つ。
         Thread.sleep(100);
 
         //2つ目のアイテム
         String string_2 = "Content 2";
         item.setContent(string_2);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         Thread.sleep(100);
 
         //3つ目のアイテム
         String string_3 = "Content 3";
         item.setContent(string_3);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         Thread.sleep(100);
 
         dataManager.deleteAll();
         //delete処理完了まで待つ。
         Thread.sleep(100);
+        assertEquals(1, callback.getCountOnDeleteToDebugItemCompleted());
         assertNull(itemsDao.getItem(1));
         assertNull(itemsDao.getItem(2));
         assertNull(itemsDao.getItem(3));

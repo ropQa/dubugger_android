@@ -67,7 +67,7 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
      * @param toDebugItems
      */
     @Override
-    public void onReadToDebugItems(List<ToDebugItems> toDebugItems) {
+    public void onReadToDebugItemsCompleted(List<ToDebugItems> toDebugItems) {
         if (toDebugItems != null) {
             if (view != null) {
                 view.setToDebugItems(toDebugItems);
@@ -82,6 +82,16 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
     public void onClickDeleteAllMenu() {
         if (interactor != null) {
             interactor.deleteAllToDebugItems();
+        }
+    }
+
+    /**
+     * アイテム削除が完了したら、再度dbを読み込む。
+     */
+    @Override
+    public void onDeleteToDebugItemCompleted() {
+        if (interactor != null) {
+            interactor.readToDebugItems();
         }
     }
 

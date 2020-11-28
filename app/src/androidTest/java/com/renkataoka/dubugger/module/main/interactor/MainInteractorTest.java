@@ -49,8 +49,6 @@ public class MainInteractorTest {
     private void initMock() {
         mockCallback.clear();
         mockDataManager.clear();
-        assertEquals(0, mockCallback.getCountOnReadToDebugItems());
-        assertEquals(0, mockCallback.getCountOnAddToDebugItemCompleted());
         assertEquals(0, mockDataManager.getCountGetAllItems());
         assertEquals(0, mockDataManager.getCountInsert());
         assertEquals(0, mockDataManager.getCountDelete());
@@ -60,7 +58,6 @@ public class MainInteractorTest {
     public void readToDebugItems() {
         interactor.readToDebugItems();
         assertEquals(1, mockDataManager.getCountGetAllItems());
-        assertEquals(1, mockCallback.getCountOnReadToDebugItems());
     }
 
     @Test
@@ -69,7 +66,6 @@ public class MainInteractorTest {
         interactor.addToDebugItem(testText);
 
         assertEquals(0, mockDataManager.getCountInsert());
-        assertEquals(0, mockCallback.getCountOnAddToDebugItemCompleted());
     }
 
     @Test
@@ -78,7 +74,6 @@ public class MainInteractorTest {
         interactor.addToDebugItem(testText);
 
         assertEquals(1, mockDataManager.getCountInsert());
-        assertEquals(1, mockCallback.getCountOnAddToDebugItemCompleted());
     }
 
     @Test

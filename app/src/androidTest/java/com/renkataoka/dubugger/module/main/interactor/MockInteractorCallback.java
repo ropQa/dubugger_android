@@ -30,4 +30,13 @@ public class MockInteractorCallback implements MainContract.InteractorCallback {
     public int getCountOnAddToDebugItemCompleted() {
         return counter.getCount("onAddToDebugItemCompleted");
     }
+
+    @Override
+    public void onDeleteToDebugItemCompleted() {
+        counter.increment("onDeleteToDebugItemCompleted");
+    }
+
+    public int getCountOnDeleteToDebugItemCompleted() {
+        return counter.getCount("onDeleteToDebugItemCompleted");
+    }
 }

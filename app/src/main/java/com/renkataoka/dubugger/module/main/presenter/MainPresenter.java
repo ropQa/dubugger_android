@@ -52,6 +52,16 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
     }
 
     /**
+     * アイテム追加が完了したら、再度dbを読み込む。
+     */
+    @Override
+    public void onAddToDebugItemCompleted() {
+        if (interactor != null) {
+            interactor.readToDebugItems();
+        }
+    }
+
+    /**
      * dbからアイテムを読み込んだら、viewに渡す。
      *
      * @param toDebugItems

@@ -68,6 +68,9 @@ public class MainInteractor implements MainContract.Interactor {
             ToDebugItems item = new ToDebugItems();
             item.setContent(content);
             dataManager.insert(item);
+            if (callback != null) {
+                callback.onAddToDebugItemCompleted();
+            }
         }
     }
 

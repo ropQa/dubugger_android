@@ -43,7 +43,7 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
      * @param inputContent 入力されたコンテンツ
      */
     @Override
-    public void onAddButtonClicked(String inputContent) {
+    public void onClickAddButton(String inputContent) {
         if (inputContent != null) {
             if (interactor != null) {
                 interactor.addToDebugItem(inputContent);

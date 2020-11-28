@@ -32,7 +32,7 @@ public class MainContract {
 
     public interface Presenter extends com.renkataoka.viper.Presenter {
         void onCreate();
-        void onAddButtonClicked(String inputContent);
+        void onClickAddButton(String inputContent);
         void onClickDeleteAllMenu();
     }
 

@@ -40,7 +40,7 @@ public class MainPresenterTest {
     @Test
     public void onAddButtonClicked() {
         String text = "testText";
-        presenter.onAddButtonClicked(text);
+        presenter.onClickAddButton(text);
 
         assertEquals(1, mockInteractor.getCountAddToDebugItem());
     }

@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         String inputContent = editText.getText().toString();
         if (inputContent.length() != 0) {
             if (presenter != null) {
-                presenter.onAddButtonClicked(inputContent);
+                presenter.onClickAddButton(inputContent);
             }
         }
     }

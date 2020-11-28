@@ -1,5 +1,6 @@
 package com.renkataoka.dubugger.module.main.view;
 
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -62,26 +63,26 @@ public class MainActivityWithMockTest {
      * 文言が入力された場合
      */
     @Test
-    public void onAddButtonClickedWithText() {
+    public void onClickAddButtonWithText() {
         scenario.onActivity(activity -> {
             EditText editText = activity.findViewById(R.id.editTextToDebugItem);
             editText.setText("TEST Text.");
             Button button = activity.findViewById(R.id.buttonAdd);
             button.performClick();
         });
-        assertEquals(1, mockPresenter.getCountOnAddButtonClicked());
+        assertEquals(1, mockPresenter.getCountOnClickAddButton());
     }
 
     /**
      * 文言が未入力の場合
      */
     @Test
-    public void onAddButtonClickedWithoutText() {
+    public void onClickAddButtonWithoutText() {
         scenario.onActivity(activity -> {
             Button button = activity.findViewById(R.id.buttonAdd);
             button.performClick();
         });
-        assertEquals(0, mockPresenter.getCountOnAddButtonClicked());
+        assertEquals(0, mockPresenter.getCountOnClickAddButton());
     }
 
     /**

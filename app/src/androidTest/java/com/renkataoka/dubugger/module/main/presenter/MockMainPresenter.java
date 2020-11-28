@@ -28,11 +28,11 @@ public class MockMainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void onAddButtonClicked(String inputItem) {
+    public void onClickAddButton(String inputItem) {
         counter.increment("onAddButtonClicked");
     }
 
-    public int getCountOnAddButtonClicked() {
+    public int getCountOnClickAddButton() {
         return counter.getCount("onAddButtonClicked");
     }
 }

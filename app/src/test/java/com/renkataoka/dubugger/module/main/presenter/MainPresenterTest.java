@@ -63,7 +63,7 @@ public class MainPresenterTest {
 
     @Test
     public void onReadToDebugItems() {
-        presenter.onReadToDebugItems(new ArrayList<>());
+        presenter.onReadToDebugItemsCompleted(new ArrayList<>());
 
         assertEquals(1, mockView.getCountSetToDebugItems());
     }

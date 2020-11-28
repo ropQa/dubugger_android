@@ -14,7 +14,7 @@ public class MockInteractorCallback implements MainContract.InteractorCallback {
     }
 
     @Override
-    public void onReadToDebugItems(List<ToDebugItems> toDebugItems) {
+    public void onReadToDebugItemsCompleted(List<ToDebugItems> toDebugItems) {
         counter.increment("onReadToDebugItems");
     }
 

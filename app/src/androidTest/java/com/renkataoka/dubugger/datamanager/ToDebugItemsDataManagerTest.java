@@ -105,24 +105,21 @@ public class ToDebugItemsDataManagerTest {
         //新しくアイテムを作り、insertする。
         String string_1 = "Content 1";
         item.setContent(string_1);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         //insert処理完了まで待つ。
         Thread.sleep(100);
-        assertEquals(1, callback.getCountOnAddToDebugItemCompleted());
 
         //2つ目のアイテム
         String string_2 = "Content 2";
         item.setContent(string_2);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         Thread.sleep(100);
-        assertEquals(2, callback.getCountOnAddToDebugItemCompleted());
 
         //3つ目のアイテム
         String string_3 = "Content 3";
         item.setContent(string_3);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         Thread.sleep(100);
-        assertEquals(3, callback.getCountOnAddToDebugItemCompleted());
 
         dataManager.delete(1);
         //delete処理完了まで待つ。
@@ -140,24 +137,21 @@ public class ToDebugItemsDataManagerTest {
         //新しくアイテムを作り、insertする。
         String string_1 = "Content 1";
         item.setContent(string_1);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         //insert処理完了まで待つ。
         Thread.sleep(100);
-        assertEquals(1, callback.getCountOnAddToDebugItemCompleted());
 
         //2つ目のアイテム
         String string_2 = "Content 2";
         item.setContent(string_2);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         Thread.sleep(100);
-        assertEquals(2, callback.getCountOnAddToDebugItemCompleted());
 
         //3つ目のアイテム
         String string_3 = "Content 3";
         item.setContent(string_3);
-        dataManager.insert(item);
+        itemsDao.insertItem(item);
         Thread.sleep(100);
-        assertEquals(3, callback.getCountOnAddToDebugItemCompleted());
 
         dataManager.deleteAll();
         //delete処理完了まで待つ。

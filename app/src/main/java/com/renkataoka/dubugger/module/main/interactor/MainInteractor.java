@@ -7,6 +7,8 @@ import com.renkataoka.dubugger.entity.ToDebugItems;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.viper.InteractorCallback;
 
+import java.util.List;
+
 /**
  * Main画面のInteractorクラス。
  */
@@ -40,6 +42,19 @@ public class MainInteractor implements MainContract.Interactor {
     @Override
     public void onDisassemble() {
         callback = null;
+    }
+
+    /**
+     * to_debug_itemsテーブルを読み込む。
+     */
+    @Override
+    public void readToDebugItems() {
+        List<ToDebugItems> toDebugItems = dataManager.loadAllItems();
+        if (toDebugItems != null) {
+            if (callback != null) {
+                callback.onReadToDebugItems(toDebugItems);
+            }
+        }
     }
 
     /**

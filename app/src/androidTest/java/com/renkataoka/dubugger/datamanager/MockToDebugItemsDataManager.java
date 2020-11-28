@@ -5,6 +5,9 @@ import android.content.Context;
 import com.renkataoka.dubugger.entity.ToDebugItems;
 import com.renkataoka.util.MethodCallCounter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ToDebugItemsのDataManagerのMockクラス。
  */
@@ -17,6 +20,17 @@ public class MockToDebugItemsDataManager extends ToDebugItemsDataManager {
 
     public MockToDebugItemsDataManager(Context context) {
         super(context);
+    }
+
+    @Override
+    public List<ToDebugItems> getAllItems() {
+        counter.increment("getAllItems");
+        //テスト用にtoDebugItemsを生成する。
+        return new ArrayList<>();
+    }
+
+    public int getCountGetAllItems() {
+        return counter.getCount("getAllItems");
     }
 
     @Override

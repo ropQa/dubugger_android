@@ -2,9 +2,12 @@ package com.renkataoka.dubugger.module.main.view;
 
 import android.content.Context;
 
+import com.renkataoka.dubugger.entity.ToDebugItems;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.util.MethodCallCounter;
 import com.renkataoka.viper.Presenter;
+
+import java.util.List;
 
 /**
  * Main画面のViewのMockクラス。
@@ -23,6 +26,15 @@ public class MockMainView implements MainContract.View {
 
     public int getCountInitRecyclerView() {
         return counter.getCount("initRecyclerView");
+    }
+
+    @Override
+    public void setToDebugItems(List<ToDebugItems> toDebugItems) {
+        counter.increment("setToDebugItems");
+    }
+
+    public int getCountSetToDebugItems() {
+        return counter.getCount("setToDebugItems");
     }
 
     @Override

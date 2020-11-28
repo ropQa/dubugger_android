@@ -1,6 +1,9 @@
 package com.renkataoka.dubugger.module.main.presenter;
 
+import com.renkataoka.dubugger.entity.ToDebugItems;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
+
+import java.util.List;
 
 /**
  * メイン画面のPresenterクラス。
@@ -27,8 +30,15 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
         this.router = router;
     }
 
+    @Override
+    public void onCreate() {
+        if (interactor != null) {
+            interactor.readToDebugItems();
+        }
+    }
+
     /**
-     * Addボタンをクリックされたら、interactorにアイテム追加を支持する。
+     * Addボタンをクリックされたら、interactorにアイテム追加を指示する。
      *
      * @param inputContent 入力されたコンテンツ
      */
@@ -37,6 +47,30 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
         if (inputContent != null) {
             if (interactor != null) {
                 interactor.addToDebugItem(inputContent);
+            }
+        }
+    }
+
+    /**
+     * アイテム追加が完了したら、再度dbを読み込む。
+     */
+    @Override
+    public void onAddToDebugItemCompleted() {
+        if (interactor != null) {
+            interactor.readToDebugItems();
+        }
+    }
+
+    /**
+     * dbからアイテムを読み込んだら、viewに渡す。
+     *
+     * @param toDebugItems
+     */
+    @Override
+    public void onReadToDebugItems(List<ToDebugItems> toDebugItems) {
+        if (toDebugItems != null) {
+            if (view != null) {
+                view.setToDebugItems(toDebugItems);
             }
         }
     }

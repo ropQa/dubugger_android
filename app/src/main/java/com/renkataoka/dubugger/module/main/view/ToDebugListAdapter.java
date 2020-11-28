@@ -8,21 +8,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.renkataoka.dubugger.R;
+import com.renkataoka.dubugger.entity.ToDebugItems;
 
-import java.util.LinkedList;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Locale;
 
 
 /**
- * ToDebugListのデータとRecyclerViewを繋ぐAdapterクラス。
+ * ToDebugListのデータ(ToDebugItems)とRecyclerViewを繋ぐAdapterクラス。
  * Viewアイテムを提供するViewHolderを作成する。
  */
 public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHolder> {
-    //View開発時用のテストdataset。
-    private LinkedList<String> dataset;
 
-    ToDebugListAdapter(LinkedList<String> dataset) {
-        this.dataset = dataset;
-    }
+    /**
+     * 日時フォーマット
+     */
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.JAPAN);
+
+    /**
+     * ToDebugItemsデータ
+     */
+    private List<ToDebugItems> toDebugItems;
 
     /**
      * @param parent   新しいViewが加えられるViewGroup
@@ -38,17 +45,16 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
 
     /**
      * ToDebugItemのデータをViewHolderに結び付ける。
+     * アイテムの中身(content)と生成日時(createdAt)を渡す。
      *
      * @param holder   データ更新対象のViewHolder。
      * @param position Viewのポジション。
      */
     @Override
     public void onBindViewHolder(@NonNull ToDebugItemViewHolder holder, int position) {
-        String itemContent = dataset.get(position);
-        //本来はアイテム追加時刻を入れるが、暫定的にIDを加えて表示を確かめる。
-        String itemCreatedAt = "ID : " + position;
-        holder.itemContentView.setText(itemContent);
-        holder.itemCreatedAtView.setText(itemCreatedAt);
+        ToDebugItems itemContent = toDebugItems.get(position);
+        holder.itemContentView.setText(itemContent.getContent());
+        holder.itemCreatedAtView.setText(dateFormat.format(itemContent.getCreatedAt()));
     }
 
     /**
@@ -56,6 +62,14 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
      */
     @Override
     public int getItemCount() {
-        return dataset.size();
+        if (toDebugItems != null) {
+            return toDebugItems.size();
+        }
+        return 0;
+    }
+
+    public void setToDebugItems(List<ToDebugItems> toDebugItems) {
+        this.toDebugItems = toDebugItems;
+        notifyDataSetChanged();
     }
 }

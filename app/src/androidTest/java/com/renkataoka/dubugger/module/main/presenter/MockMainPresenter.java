@@ -10,6 +10,15 @@ public class MockMainPresenter implements MainContract.Presenter {
     private MethodCallCounter counter = new MethodCallCounter();
 
     @Override
+    public void onCreate() {
+        counter.increment("onCreate");
+    }
+
+    public int getCountOnCreate() {
+        return counter.getCount("onCreate");
+    }
+
+    @Override
     public void disassembleModules() {
         counter.increment("disassembleModules");
     }

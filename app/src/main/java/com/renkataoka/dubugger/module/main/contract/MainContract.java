@@ -22,6 +22,7 @@ public class MainContract {
     public interface Interactor extends com.renkataoka.viper.Interactor {
         void addToDebugItem(String content);
         void deleteToDebugItem(int id);
+        void deleteAllToDebugItems();
         void readToDebugItems();
     }
 

@@ -108,4 +108,35 @@ public class ToDebugItemsDataManagerTest {
         assertNotNull(itemsDao.getItem(2));
         assertNotNull(itemsDao.getItem(3));
     }
+
+    @Test
+    public void deleteAll() throws InterruptedException {
+        //テスト用のテキスト
+        String testText = "test content No.";
+        //新しくアイテムを作り、insertする。
+        ToDebugItems item1 = new ToDebugItems();
+        item1.setContent(testText + 1);
+        dataManager.insert(item1);
+        //insert処理完了まで待つ。
+        Thread.sleep(100);
+
+        //2つ目のアイテム
+        ToDebugItems item2 = new ToDebugItems();
+        item1.setContent(testText + 2);
+        dataManager.insert(item2);
+        Thread.sleep(100);
+
+        //3つ目のアイテム
+        ToDebugItems item3 = new ToDebugItems();
+        item1.setContent(testText + 3);
+        dataManager.insert(item3);
+        Thread.sleep(100);
+
+        dataManager.deleteAll();
+        //delete処理完了まで待つ。
+        Thread.sleep(100);
+        assertNull(itemsDao.getItem(1));
+        assertNull(itemsDao.getItem(2));
+        assertNull(itemsDao.getItem(3));
+    }
 }

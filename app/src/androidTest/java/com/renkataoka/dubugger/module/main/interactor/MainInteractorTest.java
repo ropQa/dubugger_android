@@ -92,4 +92,10 @@ public class MainInteractorTest {
         interactor.deleteToDebugItem(1);
         assertEquals(1, mockDataManager.getCountDelete());
     }
+
+    @Test
+    public void deleteAll() {
+        interactor.deleteAllToDebugItems();
+        assertEquals(1, mockDataManager.getCountDeleteAll());
+    }
 }

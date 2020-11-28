@@ -33,6 +33,7 @@ public class MainContract {
     public interface Presenter extends com.renkataoka.viper.Presenter {
         void onCreate();
         void onAddButtonClicked(String inputContent);
+        void onClickDeleteAllMenu();
     }
 
     public interface Router extends com.renkataoka.viper.Router {

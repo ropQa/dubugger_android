@@ -85,4 +85,12 @@ public class MainInteractor implements MainContract.Interactor {
             dataManager.delete(id);
         }
     }
+
+    /**
+     * ToDebugItemsを全て削除する。
+     */
+    @Override
+    public void deleteAllToDebugItems() {
+        dataManager.deleteAll();
+    }
 }

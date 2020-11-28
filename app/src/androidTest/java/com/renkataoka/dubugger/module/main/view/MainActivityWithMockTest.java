@@ -1,5 +1,7 @@
 package com.renkataoka.dubugger.module.main.view;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -62,26 +64,26 @@ public class MainActivityWithMockTest {
      * 文言が入力された場合
      */
     @Test
-    public void onAddButtonClickedWithText() {
+    public void onClickAddButtonWithText() {
         scenario.onActivity(activity -> {
             EditText editText = activity.findViewById(R.id.editTextToDebugItem);
             editText.setText("TEST Text.");
             Button button = activity.findViewById(R.id.buttonAdd);
             button.performClick();
         });
-        assertEquals(1, mockPresenter.getCountOnAddButtonClicked());
+        assertEquals(1, mockPresenter.getCountOnClickAddButton());
     }
 
     /**
      * 文言が未入力の場合
      */
     @Test
-    public void onAddButtonClickedWithoutText() {
+    public void onClickAddButtonWithoutText() {
         scenario.onActivity(activity -> {
             Button button = activity.findViewById(R.id.buttonAdd);
             button.performClick();
         });
-        assertEquals(0, mockPresenter.getCountOnAddButtonClicked());
+        assertEquals(0, mockPresenter.getCountOnClickAddButton());
     }
 
     /**
@@ -154,5 +156,15 @@ public class MainActivityWithMockTest {
 
         //4件目は存在しない。
         assertNull(recyclerView.findViewHolderForAdapterPosition(position));
+    }
+
+    @Test
+    public void onClickDeleteAllMenu() {
+        scenario.onActivity(activity -> {
+            Menu menu = activity.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.menu_delete_all);
+            activity.onOptionsItemSelected(menuItem);
+        });
+        assertEquals(1, mockPresenter.getCountOnClickDeleteAllMenu());
     }
 }

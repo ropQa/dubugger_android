@@ -40,7 +40,7 @@ public class MainPresenterTest {
     @Test
     public void onAddButtonClicked() {
         String text = "testText";
-        presenter.onAddButtonClicked(text);
+        presenter.onClickAddButton(text);
 
         assertEquals(1, mockInteractor.getCountAddToDebugItem());
     }
@@ -73,5 +73,12 @@ public class MainPresenterTest {
         presenter.onAddToDebugItemCompleted();
 
         assertEquals(1, mockInteractor.getCountReadToDebugItems());
+    }
+
+    @Test
+    public void onClickDeleteAllMenu() {
+        presenter.onClickDeleteAllMenu();
+
+        assertEquals(1, mockInteractor.getCountDeleteAllToDebugItems());
     }
 }

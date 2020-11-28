@@ -26,6 +26,7 @@ public class ToDebugItemsDataManager {
     private static final int INSERT = 1;
     private static final int DELETE = 2;
     private static final int READ = 100;
+    private static final int DELETE_ALL = 102;
 
     /**
      * ItemsのDaoクラス。
@@ -95,6 +96,13 @@ public class ToDebugItemsDataManager {
     }
 
     /**
+     * ToDebugItemsを全て削除する。
+     */
+    public void deleteAll() {
+        asyncExecute(null, DELETE_ALL);
+    }
+
+    /**
      * backgroundタスクを作り、非同期処理を行う。
      *
      * @param item ToDebugItemsのアイテム。
@@ -154,6 +162,11 @@ public class ToDebugItemsDataManager {
                     break;
                 case DELETE:
                     itemsDao.deleteItem(item);
+                    break;
+                case DELETE_ALL:
+                    itemsDao.deleteAllItems();
+                    break;
+                default:
                     break;
             }
         }

@@ -50,4 +50,13 @@ public class MockToDebugItemsDataManager extends ToDebugItemsDataManager {
     public int getCountDelete() {
         return counter.getCount("delete");
     }
+
+    @Override
+    public void deleteAll() {
+        counter.increment("deleteAll");
+    }
+
+    public int getCountDeleteAll() {
+        return counter.getCount("deleteAll");
+    }
 }

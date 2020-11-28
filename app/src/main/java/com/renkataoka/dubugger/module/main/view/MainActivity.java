@@ -1,11 +1,15 @@
 package com.renkataoka.dubugger.module.main.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -30,10 +34,34 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = beginAssembleModules(this);
-        initRecyclerView();
+        initLayout();
         if (presenter != null) {
             presenter.onCreate();
         }
+    }
+
+    private void initLayout() {
+        Toolbar toolbar = findViewById(R.id.toolbarMain);
+        setSupportActionBar(toolbar);
+        initRecyclerView();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_delete_all:
+                presenter.onClickDeleteAllMenu();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     /**
@@ -93,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         String inputContent = editText.getText().toString();
         if (inputContent.length() != 0) {
             if (presenter != null) {
-                presenter.onAddButtonClicked(inputContent);
+                presenter.onClickAddButton(inputContent);
             }
         }
     }

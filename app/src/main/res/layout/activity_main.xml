@@ -7,12 +7,21 @@
     android:orientation="vertical"
     tools:context=".module.main.view.MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewToDebugList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
-        android:background="#b1d7e4"
+        android:background="@color/colorBackground"
         android:scrollbars="vertical" />
 
     <LinearLayout

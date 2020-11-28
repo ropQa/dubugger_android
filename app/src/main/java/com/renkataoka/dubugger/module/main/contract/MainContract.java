@@ -22,6 +22,7 @@ public class MainContract {
     public interface Interactor extends com.renkataoka.viper.Interactor {
         void addToDebugItem(String content);
         void deleteToDebugItem(int id);
+        void deleteAllToDebugItems();
         void readToDebugItems();
     }
 
@@ -32,7 +33,8 @@ public class MainContract {
 
     public interface Presenter extends com.renkataoka.viper.Presenter {
         void onCreate();
-        void onAddButtonClicked(String inputContent);
+        void onClickAddButton(String inputContent);
+        void onClickDeleteAllMenu();
     }
 
     public interface Router extends com.renkataoka.viper.Router {

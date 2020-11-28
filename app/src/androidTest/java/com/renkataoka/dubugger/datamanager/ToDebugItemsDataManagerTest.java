@@ -46,25 +46,25 @@ public class ToDebugItemsDataManagerTest {
 
     @Test
     public void insert() throws InterruptedException {
-        //テスト用のテキスト
-        String testText = "test content No.";
+        ToDebugItems item = new ToDebugItems();
+
         //新しくアイテムを作り、insertする。
-        ToDebugItems item1 = new ToDebugItems();
-        item1.setContent(testText + 1);
-        dataManager.insert(item1);
-        //非同期処理のため、連続してinsertを行うと順番が狂うため100ミリ秒待機する。
+        String string_1 = "Content 1";
+        item.setContent(string_1);
+        dataManager.insert(item);
+        //insert処理完了まで待つ。
         Thread.sleep(100);
 
         //2つ目のアイテム
-        ToDebugItems item2 = new ToDebugItems();
-        item2.setContent(testText + 2);
-        dataManager.insert(item2);
+        String string_2 = "Content 2";
+        item.setContent(string_2);
+        dataManager.insert(item);
         Thread.sleep(100);
 
         //3つ目のアイテム
-        ToDebugItems item3 = new ToDebugItems();
-        item3.setContent(testText + 3);
-        dataManager.insert(item3);
+        String string_3 = "Content 3";
+        item.setContent(string_3);
+        dataManager.insert(item);
         Thread.sleep(100);
 
         //Daoを用いて、insertされたアイテムを取得する。
@@ -73,32 +73,32 @@ public class ToDebugItemsDataManagerTest {
         ToDebugItems insertedItem3 = itemsDao.getItem(3);
 
         //insertしたものとされたもののcontentを比較する。
-        assertEquals(testText + 1, insertedItem.content);
-        assertEquals(testText + 2, insertedItem2.content);
-        assertEquals(testText + 3, insertedItem3.content);
+        assertEquals(string_1, insertedItem.content);
+        assertEquals(string_2, insertedItem2.content);
+        assertEquals(string_3, insertedItem3.content);
     }
 
     @Test
     public void delete() throws InterruptedException {
-        //テスト用のテキスト
-        String testText = "test content No.";
+        ToDebugItems item = new ToDebugItems();
+
         //新しくアイテムを作り、insertする。
-        ToDebugItems item1 = new ToDebugItems();
-        item1.setContent(testText + 1);
-        dataManager.insert(item1);
+        String string_1 = "Content 1";
+        item.setContent(string_1);
+        dataManager.insert(item);
         //insert処理完了まで待つ。
         Thread.sleep(100);
 
         //2つ目のアイテム
-        ToDebugItems item2 = new ToDebugItems();
-        item1.setContent(testText + 2);
-        dataManager.insert(item2);
+        String string_2 = "Content 2";
+        item.setContent(string_2);
+        dataManager.insert(item);
         Thread.sleep(100);
 
         //3つ目のアイテム
-        ToDebugItems item3 = new ToDebugItems();
-        item1.setContent(testText + 3);
-        dataManager.insert(item3);
+        String string_3 = "Content 3";
+        item.setContent(string_3);
+        dataManager.insert(item);
         Thread.sleep(100);
 
         dataManager.delete(1);
@@ -111,25 +111,25 @@ public class ToDebugItemsDataManagerTest {
 
     @Test
     public void deleteAll() throws InterruptedException {
-        //テスト用のテキスト
-        String testText = "test content No.";
+        ToDebugItems item = new ToDebugItems();
+
         //新しくアイテムを作り、insertする。
-        ToDebugItems item1 = new ToDebugItems();
-        item1.setContent(testText + 1);
-        dataManager.insert(item1);
+        String string_1 = "Content 1";
+        item.setContent(string_1);
+        dataManager.insert(item);
         //insert処理完了まで待つ。
         Thread.sleep(100);
 
         //2つ目のアイテム
-        ToDebugItems item2 = new ToDebugItems();
-        item1.setContent(testText + 2);
-        dataManager.insert(item2);
+        String string_2 = "Content 2";
+        item.setContent(string_2);
+        dataManager.insert(item);
         Thread.sleep(100);
 
         //3つ目のアイテム
-        ToDebugItems item3 = new ToDebugItems();
-        item1.setContent(testText + 3);
-        dataManager.insert(item3);
+        String string_3 = "Content 3";
+        item.setContent(string_3);
+        dataManager.insert(item);
         Thread.sleep(100);
 
         dataManager.deleteAll();

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.delete_all:
+            case R.id.menu_delete_all:
                 presenter.onClickDeleteAllMenu();
                 return true;
             default:

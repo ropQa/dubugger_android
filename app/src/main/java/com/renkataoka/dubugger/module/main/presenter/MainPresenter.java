@@ -75,6 +75,10 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
         }
     }
 
+    @Override
+    public void onClickDeleteAllMenu() {
+    }
+
     /**
      * 各コンポーネントへの参照を破棄し、破棄させる。
      */

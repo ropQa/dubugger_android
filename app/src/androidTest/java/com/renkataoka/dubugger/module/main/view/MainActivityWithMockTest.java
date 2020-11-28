@@ -1,5 +1,6 @@
 package com.renkataoka.dubugger.module.main.view;
 
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
@@ -155,5 +156,15 @@ public class MainActivityWithMockTest {
 
         //4件目は存在しない。
         assertNull(recyclerView.findViewHolderForAdapterPosition(position));
+    }
+
+    @Test
+    public void onClickDeleteAllMenu() {
+        scenario.onActivity(activity -> {
+            Menu menu = activity.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.menu_delete_all);
+            activity.onOptionsItemSelected(menuItem);
+        });
+        assertEquals(1, mockPresenter.getCountOnClickDeleteAllMenu());
     }
 }

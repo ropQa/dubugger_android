@@ -29,6 +29,7 @@ public class MainContract {
     public interface InteractorCallback extends com.renkataoka.viper.InteractorCallback {
         void onReadToDebugItems(List<ToDebugItems> toDebugItems);
         void onAddToDebugItemCompleted();
+        void onDeleteToDebugItemCompleted();
     }
 
     public interface Presenter extends com.renkataoka.viper.Presenter {

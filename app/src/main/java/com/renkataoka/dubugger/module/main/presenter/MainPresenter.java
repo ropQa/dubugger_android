@@ -86,6 +86,16 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
     }
 
     /**
+     * アイテム削除が完了したら、再度dbを読み込む。
+     */
+    @Override
+    public void onDeleteToDebugItemCompleted() {
+        if (interactor != null) {
+            interactor.readToDebugItems();
+        }
+    }
+
+    /**
      * 各コンポーネントへの参照を破棄し、破棄させる。
      */
     @Override

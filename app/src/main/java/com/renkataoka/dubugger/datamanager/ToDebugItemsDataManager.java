@@ -11,6 +11,7 @@ import androidx.annotation.WorkerThread;
 
 import com.renkataoka.dubugger.db.DubuggerRoomDatabase;
 import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.module.main.contract.MainContract;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -38,6 +39,10 @@ public class ToDebugItemsDataManager {
      */
     private List<ToDebugItems> allItems;
 
+    private MainContract.InteractorCallback callback;
+
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+
     /**
      * コンストラクタ
      *
@@ -58,6 +63,10 @@ public class ToDebugItemsDataManager {
     ToDebugItemsDataManager(DubuggerRoomDatabase db) {
         itemsDao = db.toDebugItemsDao();
         allItems = loadAllItems();
+    }
+
+    public void setCallback(MainContract.InteractorCallback callback) {
+        this.callback = callback;
     }
 
     /**
@@ -109,9 +118,25 @@ public class ToDebugItemsDataManager {
      */
     @UiThread
     private void asyncExecute(ToDebugItems item, int type) {
-        BackgroundTask backgroundTask = new BackgroundTask(itemsDao, item, type);
-        //新たにスレッドを立てる。
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        //ワーカースレッドから処理完了通知を受け取る。
+        Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                switch (msg.what) {
+                    case INSERT:
+                        callback.onAddToDebugItemCompleted();
+                        break;
+                    case DELETE:
+                    case DELETE_ALL:
+                        callback.onDeleteToDebugItemCompleted();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        BackgroundTask backgroundTask = new BackgroundTask(handler, itemsDao, item, type);
+        //ワーカースレッドで実行する。
         executorService.submit(backgroundTask);
     }
 
@@ -132,8 +157,7 @@ public class ToDebugItemsDataManager {
             }
         };
         BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, itemsDao, allItems);
-        //新たにスレッドを立てる。
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        //ワーカースレッドで実行する。
         executorService.submit(backgroundTaskRead);
         return allItems;
     }
@@ -142,11 +166,13 @@ public class ToDebugItemsDataManager {
      * insert, deleteの非同期処理を行うためのインナークラス。
      */
     private static class BackgroundTask implements Runnable {
+        private final Handler handler;
         private ToDebugItemsDao itemsDao;
         private ToDebugItems item;
         private int type;
 
-        BackgroundTask(ToDebugItemsDao itemsDao, ToDebugItems item, int type) {
+        BackgroundTask(Handler handler, ToDebugItemsDao itemsDao, ToDebugItems item, int type) {
+            this.handler = handler;
             this.itemsDao = itemsDao;
             this.item = item;
             this.type = type;
@@ -159,12 +185,15 @@ public class ToDebugItemsDataManager {
             switch (type) {
                 case INSERT:
                     itemsDao.insertItem(item);
+                    handler.sendMessage(handler.obtainMessage(INSERT));
                     break;
                 case DELETE:
                     itemsDao.deleteItem(item);
+                    handler.sendMessage(handler.obtainMessage(DELETE));
                     break;
                 case DELETE_ALL:
                     itemsDao.deleteAllItems();
+                    handler.sendMessage(handler.obtainMessage(DELETE_ALL));
                     break;
                 default:
                     break;

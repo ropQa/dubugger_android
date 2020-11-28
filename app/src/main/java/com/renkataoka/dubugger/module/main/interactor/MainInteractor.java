@@ -36,6 +36,7 @@ public class MainInteractor implements MainContract.Interactor {
     public void setInteractorCallback(InteractorCallback callback) {
         if (callback instanceof MainContract.InteractorCallback) {
             this.callback = (MainContract.InteractorCallback) callback;
+            dataManager.setCallback((MainContract.InteractorCallback) callback);
         }
     }
 

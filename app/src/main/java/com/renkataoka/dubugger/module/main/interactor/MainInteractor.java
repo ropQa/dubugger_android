@@ -49,7 +49,7 @@ public class MainInteractor implements MainContract.Interactor {
      */
     @Override
     public void readToDebugItems() {
-        List<ToDebugItems> toDebugItems = dataManager.loadAllItems();
+        List<ToDebugItems> toDebugItems = dataManager.getAllItems();
         if (toDebugItems != null) {
             if (callback != null) {
                 callback.onReadToDebugItems(toDebugItems);

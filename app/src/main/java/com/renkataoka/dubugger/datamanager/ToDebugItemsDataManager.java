@@ -1,7 +1,11 @@
 package com.renkataoka.dubugger.datamanager;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
@@ -21,6 +25,7 @@ public class ToDebugItemsDataManager {
 
     private static final int INSERT = 1;
     private static final int DELETE = 2;
+    private static final int READ = 100;
 
     /**
      * ItemsのDaoクラス。
@@ -40,7 +45,7 @@ public class ToDebugItemsDataManager {
     public ToDebugItemsDataManager(Context context) {
         DubuggerRoomDatabase db = DubuggerRoomDatabase.getDatabase(context);
         itemsDao = db.toDebugItemsDao();
-        allItems = itemsDao.loadAllItems();
+        allItems = loadAllItems();
     }
 
     /**
@@ -51,7 +56,7 @@ public class ToDebugItemsDataManager {
      */
     ToDebugItemsDataManager(DubuggerRoomDatabase db) {
         itemsDao = db.toDebugItemsDao();
-        allItems = itemsDao.loadAllItems();
+        allItems = loadAllItems();
     }
 
     /**
@@ -60,7 +65,15 @@ public class ToDebugItemsDataManager {
      * @return ToDebugItems内の全てのアイテム
      */
     public List<ToDebugItems> getAllItems() {
+        allItems = asyncRead();
         return allItems;
+    }
+
+    /**
+     * readを非同期処理で行う。
+     */
+    public List<ToDebugItems> loadAllItems() {
+        return asyncRead();
     }
 
     /**
@@ -95,7 +108,30 @@ public class ToDebugItemsDataManager {
     }
 
     /**
-     * 非同期処理を行うためのインナークラス。
+     * 非同期でdb読み込みを行う。
+     *
+     * @return 読み込み結果
+     */
+    @UiThread
+    private List<ToDebugItems> asyncRead() {
+        //ワーカースレッドからdb読み込み結果を受け取る。
+        Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                if (msg.obj != null) {
+                    allItems = (List<ToDebugItems>) msg.obj;
+                }
+            }
+        };
+        BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, itemsDao, allItems);
+        //新たにスレッドを立てる。
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.submit(backgroundTaskRead);
+        return allItems;
+    }
+
+    /**
+     * insert, deleteの非同期処理を行うためのインナークラス。
      */
     private static class BackgroundTask implements Runnable {
         private ToDebugItemsDao itemsDao;
@@ -118,7 +154,31 @@ public class ToDebugItemsDataManager {
                     break;
                 case DELETE:
                     itemsDao.deleteItem(item);
+                    break;
             }
+        }
+    }
+
+    /**
+     * readの非同期処理を行うためのインナークラス。
+     */
+    private static class BackgroundTaskRead implements Runnable {
+        private final Handler handler;
+        private ToDebugItemsDao itemsDao;
+        private List<ToDebugItems> toDebugItems;
+
+        BackgroundTaskRead(Handler handler, ToDebugItemsDao itemsDao, List<ToDebugItems> toDebugItems) {
+            this.handler = handler;
+            this.itemsDao = itemsDao;
+            this.toDebugItems = toDebugItems;
+        }
+
+        @WorkerThread
+        @Override
+        public void run() {
+            //非同期処理を開始する。
+            toDebugItems = itemsDao.loadAllItems();
+            handler.sendMessage(handler.obtainMessage(READ, toDebugItems));
         }
     }
 }

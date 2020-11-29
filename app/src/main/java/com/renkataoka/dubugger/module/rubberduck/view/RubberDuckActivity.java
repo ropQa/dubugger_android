@@ -16,6 +16,7 @@ import android.widget.EditText;
 
 import com.renkataoka.dubugger.R;
 import com.renkataoka.dubugger.entity.ChatItems;
+import com.renkataoka.dubugger.module.rubberduck.assembler.RubberDuckAssembler;
 import com.renkataoka.dubugger.module.rubberduck.contract.RubberDuckContract;
 
 import java.util.List;
@@ -96,7 +97,8 @@ public class RubberDuckActivity extends AppCompatActivity implements RubberDuckC
 
     @Override
     public RubberDuckContract.Presenter beginAssembleModules(Context context) {
-        return null;
+        RubberDuckAssembler assembler = new RubberDuckAssembler();
+        return assembler.assembleModules(context);
     }
 
     @Override

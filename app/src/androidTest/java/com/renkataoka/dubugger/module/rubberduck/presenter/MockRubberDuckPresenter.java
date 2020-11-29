@@ -8,6 +8,8 @@ import com.renkataoka.util.MethodCallCounter;
  */
 public class MockRubberDuckPresenter implements RubberDuckContract.Presenter {
     private MethodCallCounter counter = new MethodCallCounter();
+    private String inputContent;
+    private String attribute;
 
     @Override
     public void disassembleModules() {
@@ -16,5 +18,24 @@ public class MockRubberDuckPresenter implements RubberDuckContract.Presenter {
 
     public int getCountDisassembleModules() {
         return counter.getCount("disassembleModules");
+    }
+
+    @Override
+    public void onClickAddChatButton(String inputContent, String attribute) {
+        this.inputContent = inputContent;
+        this.attribute = attribute;
+        counter.increment("onClickAddChatButton");
+    }
+
+    public int getCountOnClickAddChatButton() {
+        return counter.getCount("onClickAddChatButton");
+    }
+
+    public String getInputContent() {
+        return inputContent;
+    }
+
+    public String getAttribute() {
+        return attribute;
     }
 }

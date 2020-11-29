@@ -1,5 +1,8 @@
 package com.renkataoka.dubugger.module.rubberduck.view;
 
+import android.widget.EditText;
+import android.widget.ImageButton;
+
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ActivityScenario;
@@ -8,6 +11,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.renkataoka.dubugger.R;
 import com.renkataoka.dubugger.entity.ChatItems;
+import com.renkataoka.dubugger.module.rubberduck.contract.RubberDuckContract;
 import com.renkataoka.dubugger.module.rubberduck.presenter.MockRubberDuckPresenter;
 
 import org.junit.*;
@@ -54,7 +58,73 @@ public class RubberDuckActivityWithMockTest {
         scenario.moveToState(Lifecycle.State.DESTROYED);
         assertEquals(1, mockPresenter.getCountDisassembleModules());
     }
-    
+
+    /**
+     * RubberDuckボタンが押され、文言が入力されていた場合
+     */
+    @Test
+    public void onClickAddChatRubberDuckButtonWithText() {
+        String testText = "TEST Text.";
+        scenario.onActivity(activity -> {
+            EditText editText = activity.findViewById(R.id.editTextRubberDuck);
+            editText.setText(testText);
+            ImageButton button = activity.findViewById(R.id.buttonAddRubberDuck);
+            button.performClick();
+        });
+        assertEquals(testText, mockPresenter.getInputContent());
+        assertEquals(RubberDuckContract.RUBBER_DUCK, mockPresenter.getAttribute());
+        assertEquals(1, mockPresenter.getCountOnClickAddChatButton());
+    }
+
+    /**
+     * RubberDuckボタンが押され、文言が未入力の場合
+     */
+    @Test
+    public void onClickAddChatRubberDuckButtonWithoutText() {
+        String testText = "";
+        scenario.onActivity(activity -> {
+            EditText editText = activity.findViewById(R.id.editTextRubberDuck);
+            editText.setText(testText);
+            ImageButton button = activity.findViewById(R.id.buttonAddRubberDuck);
+            button.performClick();
+        });
+        assertNotEquals(RubberDuckContract.RUBBER_DUCK, mockPresenter.getAttribute());
+        assertEquals(0, mockPresenter.getCountOnClickAddChatButton());
+    }
+
+    /**
+     * Userボタンが押され、文言が入力されていた場合
+     */
+    @Test
+    public void onClickAddChatUserButtonWithText() {
+        String testText = "TEST Text.";
+        scenario.onActivity(activity -> {
+            EditText editText = activity.findViewById(R.id.editTextRubberDuck);
+            editText.setText(testText);
+            ImageButton button = activity.findViewById(R.id.buttonAddUser);
+            button.performClick();
+        });
+        assertEquals(testText, mockPresenter.getInputContent());
+        assertEquals(RubberDuckContract.USER, mockPresenter.getAttribute());
+        assertEquals(1, mockPresenter.getCountOnClickAddChatButton());
+    }
+
+    /**
+     * Userボタンが押され、文言が未入力の場合
+     */
+    @Test
+    public void onClickAddChatUserButtonWithoutText() {
+        String testText = "";
+        scenario.onActivity(activity -> {
+            EditText editText = activity.findViewById(R.id.editTextRubberDuck);
+            editText.setText(testText);
+            ImageButton button = activity.findViewById(R.id.buttonAddUser);
+            button.performClick();
+        });
+        assertNotEquals(RubberDuckContract.USER, mockPresenter.getAttribute());
+        assertEquals(0, mockPresenter.getCountOnClickAddChatButton());
+    }
+
     @Test
     public void setChatItems() {
         //UIスレッド上で、activityへの参照を得るためのリファレンス。

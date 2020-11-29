@@ -62,6 +62,7 @@ public class MainActivityWithMockTest {
 
     /**
      * 文言が入力された場合
+     * TODO rubberduckモジュールにならい、文言のassertionも作る。
      */
     @Test
     public void onClickAddButtonWithText() {

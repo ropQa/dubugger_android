@@ -1,5 +1,9 @@
 package com.renkataoka.dubugger.module.rubberduck.contract;
 
+import com.renkataoka.dubugger.entity.ChatItems;
+
+import java.util.List;
+
 /**
  * ラバーダックデバッグ画面のContractクラス。
  */
@@ -8,6 +12,8 @@ public class RubberDuckContract {
     }
 
     public interface View extends com.renkataoka.viper.View {
+        void initRecyclerView();
+        void setChatItems(List<ChatItems> chatItems);
     }
 
     public interface Interactor extends com.renkataoka.viper.Interactor {

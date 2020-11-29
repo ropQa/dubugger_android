@@ -23,6 +23,9 @@ public class RubberDuckContract {
     }
 
     public interface InteractorCallback extends com.renkataoka.viper.InteractorCallback {
+        void onAddChatItemCompleted();
+        void onDeleteChatItemCompleted();
+        void onReadChatItemsCompleted(List<ChatItems> chatItems);
     }
 
     public interface Presenter extends com.renkataoka.viper.Presenter {

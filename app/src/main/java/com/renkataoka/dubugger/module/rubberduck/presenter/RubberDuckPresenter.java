@@ -72,7 +72,7 @@ public class RubberDuckPresenter implements RubberDuckContract.Presenter, Rubber
      */
     @Override
     public void onClickAddChatButton(String inputContent, String attribute) {
-        if (inputContent != null && attribute != null) {
+        if (inputContent.length() != 0 && attribute != null) {
             if (interactor != null) {
                 interactor.addChatItem(inputContent, attribute);
             }

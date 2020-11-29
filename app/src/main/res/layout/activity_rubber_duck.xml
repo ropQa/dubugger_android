@@ -17,7 +17,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerRubberDuck"
+        android:id="@+id/recyclerViewRubberDuck"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"

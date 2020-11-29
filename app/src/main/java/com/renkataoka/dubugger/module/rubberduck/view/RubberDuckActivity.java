@@ -42,7 +42,7 @@ public class RubberDuckActivity extends AppCompatActivity implements RubberDuckC
      */
     @Override
     public void initRecyclerView() {
-        recyclerView = findViewById(R.id.recyclerRubberDuck);
+        recyclerView = findViewById(R.id.recyclerViewRubberDuck);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new DebugChatAdapter();
         recyclerView.setAdapter(adapter);

@@ -8,6 +8,9 @@ import java.util.List;
  * ラバーダックデバッグ画面のContractクラス。
  */
 public class RubberDuckContract {
+    public static final String RUBBER_DUCK = "rubberduck";
+    public static final String USER = "user";
+
     private RubberDuckContract() {
     }
 
@@ -23,6 +26,7 @@ public class RubberDuckContract {
     }
 
     public interface Presenter extends com.renkataoka.viper.Presenter {
+        void onClickAddChatButton(String inputContent, String attribute);
     }
 
     public interface Router extends com.renkataoka.viper.Router {

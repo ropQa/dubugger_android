@@ -37,7 +37,8 @@
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:background="@color/colorRubberDuck"
-            android:src="@drawable/ic_duck" />
+            android:src="@drawable/ic_duck"
+            android:onClick="onClickAddChatButton"/>
 
         <EditText
             android:id="@+id/editTextRubberDuck"
@@ -55,7 +56,8 @@
             android:layout_height="50dp"
             android:layout_gravity="end"
             android:background="@color/colorBackground"
-            android:src="@drawable/ic_user" />
+            android:src="@drawable/ic_user"
+            android:onClick="onClickAddChatButton"/>
 
     </LinearLayout>
 

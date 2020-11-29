@@ -40,6 +40,7 @@
             android:hint="@string/hint_toDebugItem"
             android:inputType="textMultiLine" />
 
+        <!-- TODO onClickメソッドの名称変更 -> onClickAddItemButton -->
         <Button
             android:id="@+id/buttonAdd"
             android:layout_width="wrap_content"

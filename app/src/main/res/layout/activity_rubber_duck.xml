@@ -4,6 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".module.rubberduck.view.RubberDuckActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarRubberDuck"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRubberDuck"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:background="@color/colorBackground"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/buttonAddRubberDuck"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:background="@color/colorRubberDuck"
+            android:src="@drawable/ic_duck"
+            android:onClick="onClickAddChatButton"/>
+
+        <EditText
+            android:id="@+id/editTextRubberDuck"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:autofillHints="@string/hint_makeConversation"
+            android:hint="@string/hint_makeConversation"
+            android:inputType="textMultiLine" />
+
+        <ImageButton
+            android:id="@+id/buttonAddUser"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:background="@color/colorBackground"
+            android:src="@drawable/ic_user"
+            android:onClick="onClickAddChatButton"/>
+
+    </LinearLayout>
 
 </LinearLayout>

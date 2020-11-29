@@ -27,11 +27,12 @@ public class MainRouter implements MainContract.Router {
         //Router側でContextを破棄することで、繋ぐViewとの結合を解除する。
         context = null;
     }
-    
+
     @Override
-    public void startRubberDuckActivity() {
+    public void startRubberDuckActivity(int position) {
         Intent intent = new Intent();
         intent.setClass(context, RubberDuckActivity.class);
+        intent.putExtra(MainContract.MASTER_ID, position);
         if (context instanceof Activity) {
             ((Activity) context).startActivityForResult(intent, MainContract.REQUEST_CODE);
         }

@@ -95,6 +95,13 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
         }
     }
 
+    @Override
+    public void onClickToDebugItem(int position) {
+        if (router != null) {
+            router.startRubberDuckActivity(position);
+        }
+    }
+
     /**
      * 各コンポーネントへの参照を破棄し、破棄させる。
      */

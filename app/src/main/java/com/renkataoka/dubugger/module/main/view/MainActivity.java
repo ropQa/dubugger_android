@@ -72,7 +72,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void initRecyclerView() {
         recyclerView = findViewById(R.id.recyclerViewToDebugList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ToDebugListAdapter();
+        adapter = new ToDebugListAdapter(){
+            //アイテムのクリックイベントが発生したら、画面切り替えを行う。
+            @Override
+            void onItemClick(View view, int position) {
+                presenter.onClickToDebugItem(position);
+            }
+        };
         recyclerView.setAdapter(adapter);
     }
 

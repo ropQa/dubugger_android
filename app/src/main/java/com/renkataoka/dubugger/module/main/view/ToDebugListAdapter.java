@@ -40,7 +40,12 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
     @Override
     public ToDebugItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.to_debug_list, parent, false);
-        return new ToDebugItemViewHolder(view);
+        ToDebugItemViewHolder holder = new ToDebugItemViewHolder(view);
+        holder.itemView.setOnClickListener(v -> {
+            int position = holder.getAdapterPosition();
+            onItemClick(v, position);
+        });
+        return holder;
     }
 
     /**
@@ -71,5 +76,14 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
     public void setToDebugItems(List<ToDebugItems> toDebugItems) {
         this.toDebugItems = toDebugItems;
         notifyDataSetChanged();
+    }
+
+    /**
+     * MainActivityで操作するためのonClickメソッド
+     *
+     * @param view クリックされたview
+     * @param position viewのポジション
+     */
+    void onItemClick(View view, int position) {
     }
 }

@@ -82,7 +82,7 @@ public class ToDebugItemsDataManager {
     /**
      * readを非同期処理で行う。
      */
-    public List<ToDebugItems> loadAllItems() {
+    private List<ToDebugItems> loadAllItems() {
         return asyncRead();
     }
 

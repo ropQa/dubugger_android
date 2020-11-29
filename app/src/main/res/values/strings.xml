@@ -3,4 +3,5 @@
     <string name="hint_toDebugItem">Enter what you figure out.</string>
     <string name="buttonAddToDebugItem">Add</string>
     <string name="menu_deleteAll">Delete All</string>
+    <string name="hint_makeConversation">Make your conversation.</string>
 </resources>

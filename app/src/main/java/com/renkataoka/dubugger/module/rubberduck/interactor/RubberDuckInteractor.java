@@ -1,4 +1,4 @@
-package com.renkataoka.dubugger.module.rubberduck;
+package com.renkataoka.dubugger.module.rubberduck.interactor;
 
 import android.content.Context;
 
@@ -16,7 +16,7 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
     /**
      * InteractorCallbackクラスのオブジェクト。
      */
-    private MainContract.InteractorCallback callback;
+    private RubberDuckContract.InteractorCallback callback;
 
     /**
      * ChatItemsのDataManagerクラスのオブジェクト。
@@ -34,7 +34,7 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
     @Override
     public void setInteractorCallback(InteractorCallback callback) {
         if (callback instanceof RubberDuckContract.InteractorCallback) {
-            this.callback = (MainContract.InteractorCallback) callback;
+            this.callback = (RubberDuckContract.InteractorCallback) callback;
             dataManager.setCallback((RubberDuckContract.InteractorCallback) callback);
         }
     }

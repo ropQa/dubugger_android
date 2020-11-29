@@ -31,6 +31,16 @@ public class MockRubberDuckPresenter implements RubberDuckContract.Presenter {
         return counter.getCount("onClickAddChatButton");
     }
 
+    @Override
+    public void onClickDeleteAllMenu() {
+        counter.increment("onClickDeleteAllMenu");
+    }
+
+    public int getCountOnClickDeleteAllMenu() {
+        return counter.getCount("onClickDeleteAllMenu");
+    }
+
+
     public String getInputContent() {
         return inputContent;
     }

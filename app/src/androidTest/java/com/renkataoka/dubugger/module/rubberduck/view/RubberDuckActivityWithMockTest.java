@@ -1,5 +1,7 @@
 package com.renkataoka.dubugger.module.rubberduck.view;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -191,5 +193,15 @@ public class RubberDuckActivityWithMockTest {
 
         //4件目は存在しない。
         assertNull(recyclerView.findViewHolderForAdapterPosition(position));
+    }
+
+    @Test
+    public void onClickDeleteAllMenu() {
+        scenario.onActivity(activity -> {
+            Menu menu = activity.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.menu_rubber_duck_delete_all);
+            activity.onOptionsItemSelected(menuItem);
+        });
+        assertEquals(1, mockPresenter.getCountOnClickDeleteAllMenu());
     }
 }

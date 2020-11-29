@@ -6,13 +6,15 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.renkataoka.dubugger.datamanager.ChatItemsDao;
 import com.renkataoka.dubugger.datamanager.ToDebugItemsDao;
+import com.renkataoka.dubugger.entity.ChatItems;
 import com.renkataoka.dubugger.entity.ToDebugItems;
 
 /**
  * RoomアーキテクチャにおけるRoomデータベース。
  */
-@Database(entities = {ToDebugItems.class}, version = 1, exportSchema = true)
+@Database(entities = {ToDebugItems.class, ChatItems.class}, version = 1, exportSchema = true)
 //TODO exportSchemaでバージョン管理するメリット
 public abstract class DubuggerRoomDatabase extends RoomDatabase {
 
@@ -22,6 +24,13 @@ public abstract class DubuggerRoomDatabase extends RoomDatabase {
      * @return ToDebugItemsDaoのオブジェクト。
      */
     public abstract ToDebugItemsDao toDebugItemsDao();
+
+    /**
+     * db操作に使用するDAOの抽象メソッド。
+     *
+     * @return ChatItemsDaoのオブジェクト。
+     */
+    public abstract ChatItemsDao chatItemsDao();
 
     private static DubuggerRoomDatabase dubuggerRoomDatabase;
 

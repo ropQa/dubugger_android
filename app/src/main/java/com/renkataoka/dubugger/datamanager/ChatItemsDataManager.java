@@ -51,7 +51,12 @@ public class ChatItemsDataManager {
     public ChatItemsDataManager(Context context) {
         DubuggerRoomDatabase db = DubuggerRoomDatabase.getDatabase(context);
         itemsDao = db.chatItemsDao();
-        allItems = loadAllItems();
+        allItems = loadAllChats();
+    }
+
+    ChatItemsDataManager(DubuggerRoomDatabase db) {
+        itemsDao = db.chatItemsDao();
+        allItems = loadAllChats();
     }
 
     public void setCallback(RubberDuckContract.InteractorCallback callback) {
@@ -73,8 +78,8 @@ public class ChatItemsDataManager {
      *
      * @return 読み込み結果
      */
-    private List<ChatItems> loadAllItems() {
-        return null;
+    private List<ChatItems> loadAllChats() {
+        return asyncRead();
     }
 
     /**

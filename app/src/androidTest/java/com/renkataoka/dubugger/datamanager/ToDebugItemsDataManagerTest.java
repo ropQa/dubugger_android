@@ -7,7 +7,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.renkataoka.dubugger.db.DubuggerRoomDatabase;
 import com.renkataoka.dubugger.entity.ToDebugItems;
-import com.renkataoka.dubugger.module.main.interactor.MockInteractorCallback;
+import com.renkataoka.dubugger.module.main.interactor.MockMainInteractorCallback;
 
 import org.junit.*;
 
@@ -35,7 +35,7 @@ public class ToDebugItemsDataManagerTest {
     /**
      * MainモジュールのInteractorCallbackのMockクラス。
      */
-    private MockInteractorCallback callback;
+    private MockMainInteractorCallback callback;
 
     @Before
     public void setUp() {
@@ -43,7 +43,7 @@ public class ToDebugItemsDataManagerTest {
         db = Room.inMemoryDatabaseBuilder(context, DubuggerRoomDatabase.class).build();
         itemsDao = db.toDebugItemsDao();
         dataManager = new ToDebugItemsDataManager(db);
-        callback = new MockInteractorCallback();
+        callback = new MockMainInteractorCallback();
         dataManager.setCallback(callback);
         initMock();
     }

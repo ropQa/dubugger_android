@@ -6,7 +6,7 @@ import com.renkataoka.util.MethodCallCounter;
 
 import java.util.List;
 
-public class MockInteractorCallback implements MainContract.InteractorCallback {
+public class MockMainInteractorCallback implements MainContract.InteractorCallback {
     private MethodCallCounter counter = new MethodCallCounter();
 
     public void clear() {

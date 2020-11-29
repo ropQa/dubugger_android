@@ -29,7 +29,7 @@ public class MainInteractorTest {
     /**
      * InteractorCallbackのMockクラス。
      */
-    private MockInteractorCallback mockCallback = new MockInteractorCallback();
+    private MockMainInteractorCallback mockCallback = new MockMainInteractorCallback();
 
     @Before
     public void setUp() {

@@ -19,6 +19,9 @@ public interface ChatItemsDao {
     @Query("SELECT chat_items.*, `rowid` FROM chat_items ORDER BY rowid ASC")
     public List<ChatItems> loadAllChats();
 
+    @Query("SELECT chat_items.*, `rowid` FROM chat_items WHERE rowid = :id")
+    public ChatItems getChat(int id);
+
     @Insert
     public void insertChat(ChatItems item);
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 
 import com.renkataoka.dubugger.R;
 import com.renkataoka.dubugger.entity.ChatItems;
+import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.dubugger.module.rubberduck.assembler.RubberDuckAssembler;
 import com.renkataoka.dubugger.module.rubberduck.contract.RubberDuckContract;
 
@@ -35,6 +37,12 @@ public class RubberDuckActivity extends AppCompatActivity implements RubberDuckC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rubber_duck);
         presenter = beginAssembleModules(this);
+        //メイン画面から受け取ったアイテムIDをpresenterに渡す。
+        Intent intent = getIntent();
+        int position = intent.getIntExtra(MainContract.MASTER_ID, 0);
+        if (presenter != null) {
+            presenter.onCreate(position);
+        }
         initLayout();
     }
 

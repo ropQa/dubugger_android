@@ -20,6 +20,7 @@ public class RubberDuckContract {
     }
 
     public interface Interactor extends com.renkataoka.viper.Interactor {
+        void setMasterTable(int position);
         void addChatItem(String content, String attribute);
         void deleteChatItem(int id);
         void deleteAllChatItems();
@@ -33,6 +34,7 @@ public class RubberDuckContract {
     }
 
     public interface Presenter extends com.renkataoka.viper.Presenter {
+        void onCreate(int position);
         void onClickAddChatButton(String inputContent, String attribute);
         void onClickDeleteAllMenu();
     }

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.renkataoka.dubugger.datamanager.ChatItemsDataManager;
 import com.renkataoka.dubugger.entity.ChatItems;
-import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.dubugger.module.rubberduck.contract.RubberDuckContract;
 import com.renkataoka.viper.InteractorCallback;
 
@@ -23,12 +22,17 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
      */
     private ChatItemsDataManager dataManager;
 
+    /**
+     * 主テーブルの主キーを表すinteger
+     */
+    private int position;
+
     public RubberDuckInteractor(Context context) {
         dataManager = createDataManager(context);
     }
 
     ChatItemsDataManager createDataManager(Context context) {
-        return new ChatItemsDataManager(context);
+        return new ChatItemsDataManager(context, position);
     }
 
     @Override
@@ -37,6 +41,11 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
             this.callback = (RubberDuckContract.InteractorCallback) callback;
             dataManager.setCallback((RubberDuckContract.InteractorCallback) callback);
         }
+    }
+
+    @Override
+    public void setMasterTable(int position) {
+        this.position = position;
     }
 
     @Override
@@ -49,7 +58,7 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
      */
     @Override
     public void readChatItems() {
-        dataManager.getAllItems();
+        dataManager.getAllItems(position);
     }
 
     @Override
@@ -58,6 +67,7 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
             ChatItems item = new ChatItems();
             item.setContent(content);
             item.setAttribute(attribute);
+            item.setTo_debug_id(position);
             dataManager.insert(item);
         }
     }

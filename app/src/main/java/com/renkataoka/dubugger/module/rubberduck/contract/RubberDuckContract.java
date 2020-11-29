@@ -27,6 +27,7 @@ public class RubberDuckContract {
 
     public interface Presenter extends com.renkataoka.viper.Presenter {
         void onClickAddChatButton(String inputContent, String attribute);
+        void onClickDeleteAllMenu();
     }
 
     public interface Router extends com.renkataoka.viper.Router {

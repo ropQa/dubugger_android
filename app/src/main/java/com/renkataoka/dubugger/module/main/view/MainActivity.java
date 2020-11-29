@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.renkataoka.dubugger.R;
@@ -119,6 +120,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void onAddButtonClicked(View view) {
         EditText editText = findViewById(R.id.editTextToDebugItem);
         String inputContent = editText.getText().toString();
+        //入力されたら、文言有無にかかわらず、文言初期化しキーボードを閉じる。
+        editText.setText("");
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         if (inputContent.length() != 0) {
             if (presenter != null) {
                 presenter.onClickAddButton(inputContent);

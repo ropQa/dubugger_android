@@ -38,7 +38,7 @@
             android:layout_weight="1"
             android:autofillHints="@string/hint_toDebugItem"
             android:hint="@string/hint_toDebugItem"
-            android:inputType="textShortMessage" />
+            android:inputType="textMultiLine" />
 
         <Button
             android:id="@+id/buttonAdd"

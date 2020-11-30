@@ -16,8 +16,8 @@ import java.util.List;
 @Dao
 public interface ChatItemsDao {
 
-    @Query("SELECT chat_items.*, `rowid` FROM chat_items ORDER BY rowid ASC")
-    public List<ChatItems> loadAllChats();
+    @Query("SELECT chat_items.*, `rowid` FROM chat_items WHERE to_debug_id = :position ORDER BY rowid ASC")
+    public List<ChatItems> loadAllChats(int position);
 
     @Query("SELECT chat_items.*, `rowid` FROM chat_items WHERE rowid = :id")
     public ChatItems getChat(int id);

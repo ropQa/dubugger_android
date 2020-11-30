@@ -48,7 +48,13 @@ public class ChatItemsDataManager {
      */
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    public ChatItemsDataManager(Context context) {
+    /**
+     * アイテム番号を示すinteger
+     */
+    private int position;
+
+    public ChatItemsDataManager(Context context, int position) {
+        this.position = position;
         DubuggerRoomDatabase db = DubuggerRoomDatabase.getDatabase(context);
         itemsDao = db.chatItemsDao();
         allItems = loadAllChats();
@@ -68,8 +74,8 @@ public class ChatItemsDataManager {
      *
      * @return ChatItems内の全てのアイテム
      */
-    public List<ChatItems> getAllItems() {
-        allItems = asyncRead();
+    public List<ChatItems> getAllItems(int position) {
+        allItems = asyncRead(position);
         return allItems;
     }
 
@@ -79,7 +85,7 @@ public class ChatItemsDataManager {
      * @return 読み込み結果
      */
     private List<ChatItems> loadAllChats() {
-        return asyncRead();
+        return asyncRead(position);
     }
 
     /**
@@ -142,7 +148,7 @@ public class ChatItemsDataManager {
      * @return 読み込み結果
      */
     @UiThread
-    private List<ChatItems> asyncRead() {
+    private List<ChatItems> asyncRead(int position) {
         //ワーカースレッドからdb読み込み結果を受け取る。
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -153,7 +159,7 @@ public class ChatItemsDataManager {
                 }
             }
         };
-        BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, itemsDao, allItems);
+        BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, itemsDao, allItems, position);
         //ワーカースレッドで実行する。
         executorService.submit(backgroundTaskRead);
         return allItems;
@@ -205,18 +211,20 @@ public class ChatItemsDataManager {
         private final Handler handler;
         private ChatItemsDao itemsDao;
         private List<ChatItems> chatItems;
+        private int position;
 
-        BackgroundTaskRead(Handler handler, ChatItemsDao itemsDao, List<ChatItems> chatItems) {
+        BackgroundTaskRead(Handler handler, ChatItemsDao itemsDao, List<ChatItems> chatItems, int position) {
             this.handler = handler;
             this.itemsDao = itemsDao;
             this.chatItems = chatItems;
+            this.position = position;
         }
 
         @WorkerThread
         @Override
         public void run() {
             //非同期処理を開始する。
-            chatItems = itemsDao.loadAllChats();
+            chatItems = itemsDao.loadAllChats(position);
             handler.sendMessage(handler.obtainMessage(READ, chatItems));
         }
     }

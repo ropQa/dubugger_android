@@ -33,6 +33,7 @@ public class RubberDuckContract {
     }
 
     public interface Presenter extends com.renkataoka.viper.Presenter {
+        void onCreate(int id);
         void onClickAddChatButton(String inputContent, String attribute);
         void onClickDeleteAllMenu();
     }

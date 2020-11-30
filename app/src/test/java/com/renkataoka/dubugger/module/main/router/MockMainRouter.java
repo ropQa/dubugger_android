@@ -14,7 +14,7 @@ public class MockMainRouter implements MainContract.Router {
     }
 
     @Override
-    public void startRubberDuckActivity() {
+    public void startRubberDuckActivity(int id) {
         counter.increment("startRubberDuckActivity");
     }
 

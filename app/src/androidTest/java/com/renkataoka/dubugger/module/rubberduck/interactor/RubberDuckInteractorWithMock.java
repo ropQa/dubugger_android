@@ -13,17 +13,24 @@ public class RubberDuckInteractorWithMock extends RubberDuckInteractor {
      */
     private MockChatItemsDataManager dataManager;
 
+    private int key;
+
     public RubberDuckInteractorWithMock(Context context) {
         super(context);
     }
 
     @Override
-    MockChatItemsDataManager createDataManager(Context context) {
+    MockChatItemsDataManager createDataManager(Context context, int key) {
         this.dataManager = new MockChatItemsDataManager(context);
+        this.key = key;
         return dataManager;
     }
 
     MockChatItemsDataManager getMockChatItemsDataManager() {
         return dataManager;
+    }
+
+    public int getKey() {
+        return key;
     }
 }

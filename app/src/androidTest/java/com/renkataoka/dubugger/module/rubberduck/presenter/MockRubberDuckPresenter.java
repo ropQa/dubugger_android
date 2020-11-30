@@ -12,6 +12,15 @@ public class MockRubberDuckPresenter implements RubberDuckContract.Presenter {
     private String attribute;
 
     @Override
+    public void onCreate(int id) {
+        counter.increment("onCreate");
+    }
+
+    public int getCountOnCreate() {
+        return counter.getCount("onCreate");
+    }
+
+    @Override
     public void disassembleModules() {
         counter.increment("disassembleModules");
     }

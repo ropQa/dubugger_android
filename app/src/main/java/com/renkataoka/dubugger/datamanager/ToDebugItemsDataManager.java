@@ -11,6 +11,7 @@ import androidx.annotation.WorkerThread;
 
 import com.renkataoka.dubugger.db.DubuggerRoomDatabase;
 import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChats;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class ToDebugItemsDataManager {
     /**
      * Itemsの全アイテムを取得するList型オブジェクト。
      */
-    private List<ToDebugItems> allItems;
+    private List<ToDebugItemsAndChats> allItems;
 
     private MainContract.InteractorCallback callback;
 
@@ -74,7 +75,7 @@ public class ToDebugItemsDataManager {
      *
      * @return ToDebugItems内の全てのアイテム
      */
-    public List<ToDebugItems> getAllItems() {
+    public List<ToDebugItemsAndChats> getAllItems() {
         allItems = asyncRead();
         return allItems;
     }
@@ -82,7 +83,7 @@ public class ToDebugItemsDataManager {
     /**
      * readを非同期処理で行う。
      */
-    private List<ToDebugItems> loadAllItems() {
+    private List<ToDebugItemsAndChats> loadAllItems() {
         return asyncRead();
     }
 
@@ -146,13 +147,13 @@ public class ToDebugItemsDataManager {
      * @return 読み込み結果
      */
     @UiThread
-    private List<ToDebugItems> asyncRead() {
+    private List<ToDebugItemsAndChats> asyncRead() {
         //ワーカースレッドからdb読み込み結果を受け取る。
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 if (msg.obj != null) {
-                    allItems = (List<ToDebugItems>) msg.obj;
+                    allItems = (List<ToDebugItemsAndChats>) msg.obj;
                     callback.onReadToDebugItemsCompleted(allItems);
                 }
             }
@@ -208,9 +209,9 @@ public class ToDebugItemsDataManager {
     private static class BackgroundTaskRead implements Runnable {
         private final Handler handler;
         private ToDebugItemsDao itemsDao;
-        private List<ToDebugItems> toDebugItems;
+        private List<ToDebugItemsAndChats> toDebugItems;
 
-        BackgroundTaskRead(Handler handler, ToDebugItemsDao itemsDao, List<ToDebugItems> toDebugItems) {
+        BackgroundTaskRead(Handler handler, ToDebugItemsDao itemsDao, List<ToDebugItemsAndChats> toDebugItems) {
             this.handler = handler;
             this.itemsDao = itemsDao;
             this.toDebugItems = toDebugItems;

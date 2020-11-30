@@ -15,7 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.renkataoka.dubugger.R;
-import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChats;
 import com.renkataoka.dubugger.module.main.assembler.MainAssembler;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 
@@ -85,12 +85,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     /**
      * recyclerViewのアダプターにアイテムをセットする。
      *
-     * @param toDebugItems dbから取得したアイテム
+     * @param toDebugItemsAndChats dbから取得したアイテム
      */
     @Override
-    public void setToDebugItems(List<ToDebugItems> toDebugItems) {
+    public void setToDebugItemsAndChats(List<ToDebugItemsAndChats> toDebugItemsAndChats) {
         if (adapter instanceof ToDebugListAdapter) {
-            ((ToDebugListAdapter) adapter).setToDebugItems(toDebugItems);
+            ((ToDebugListAdapter) adapter).setToDebugItemsAndChats(toDebugItemsAndChats);
         }
     }
 

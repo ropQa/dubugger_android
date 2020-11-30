@@ -1,6 +1,6 @@
 package com.renkataoka.dubugger.module.main.presenter;
 
-import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChats;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 
 import java.util.List;
@@ -64,13 +64,13 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
     /**
      * dbからアイテムを読み込んだら、viewに渡す。
      *
-     * @param toDebugItems
+     * @param toDebugItemsAndChats
      */
     @Override
-    public void onReadToDebugItemsCompleted(List<ToDebugItems> toDebugItems) {
-        if (toDebugItems != null) {
+    public void onReadToDebugItemsCompleted(List<ToDebugItemsAndChats> toDebugItemsAndChats) {
+        if (toDebugItemsAndChats != null) {
             if (view != null) {
-                view.setToDebugItems(toDebugItems);
+                view.setToDebugItemsAndChats(toDebugItemsAndChats);
             }
         }
     }

@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.renkataoka.dubugger.R;
-import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChats;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
     /**
      * ToDebugItemsデータ
      */
-    private List<ToDebugItems> toDebugItems;
+    private List<ToDebugItemsAndChats> toDebugItemsAndChats;
 
     /**
      * @param parent   新しいViewが加えられるViewGroup
@@ -57,9 +57,9 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
      */
     @Override
     public void onBindViewHolder(@NonNull ToDebugItemViewHolder holder, int position) {
-        ToDebugItems itemContent = toDebugItems.get(position);
-        holder.itemContentView.setText(itemContent.getContent());
-        holder.itemCreatedAtView.setText(dateFormat.format(itemContent.getCreatedAt()));
+        ToDebugItemsAndChats item = toDebugItemsAndChats.get(position);
+        holder.itemContentView.setText(item.toDebugItems.getContent());
+        holder.itemCreatedAtView.setText(dateFormat.format(item.toDebugItems.getCreatedAt()));
     }
 
     /**
@@ -67,14 +67,14 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
      */
     @Override
     public int getItemCount() {
-        if (toDebugItems != null) {
-            return toDebugItems.size();
+        if (toDebugItemsAndChats != null) {
+            return toDebugItemsAndChats.size();
         }
         return 0;
     }
 
-    public void setToDebugItems(List<ToDebugItems> toDebugItems) {
-        this.toDebugItems = toDebugItems;
+    public void setToDebugItemsAndChats(List<ToDebugItemsAndChats> toDebugItemsAndChats) {
+        this.toDebugItemsAndChats = toDebugItemsAndChats;
         notifyDataSetChanged();
     }
 

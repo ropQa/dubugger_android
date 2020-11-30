@@ -2,6 +2,7 @@ package com.renkataoka.dubugger.module.main.view;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -167,5 +168,62 @@ public class MainActivityWithMockTest {
             activity.onOptionsItemSelected(menuItem);
         });
         assertEquals(1, mockPresenter.getCountOnClickDeleteAllMenu());
+    }
+
+    /**
+     * メイン画面のRecyclerViewのクリックイベントのテスト。
+     */
+    @Test
+    public void onToDebugItemClick() {
+        //UIスレッド上で、activityへの参照を得るためのリファレンス。
+        AtomicReference<MainActivityWithMock> atomicReference = new AtomicReference<>();
+
+        // テストデータ生成
+        List<ToDebugItems> toDebugItems = new ArrayList<>();
+        ToDebugItems item;
+        //1件目
+        String string_1 = "Content1";
+        item = new ToDebugItems();
+        item.setContent(string_1);
+        toDebugItems.add(item);
+
+        //2件目
+        String string_2 = "Content2";
+        item = new ToDebugItems();
+        item.setContent(string_2);
+        toDebugItems.add(item);
+
+        //3件目
+        String string_3 = "Content3";
+        item = new ToDebugItems();
+        item.setContent(string_3);
+        toDebugItems.add(item);
+
+        scenario.onActivity(activity -> {
+            activity.setToDebugItems(toDebugItems);
+            atomicReference.set(activity);
+        });
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+
+        scenario.onActivity(activity -> {
+            RecyclerView recyclerView = activity.findViewById(R.id.recyclerViewToDebugList);
+            View view = recyclerView.getChildAt(0);
+            view.performClick();
+        });
+        assertEquals(1, mockPresenter.getCountOnClickToDebugItem());
+
+        scenario.onActivity(activity -> {
+            RecyclerView recyclerView = activity.findViewById(R.id.recyclerViewToDebugList);
+            View view = recyclerView.getChildAt(0);
+            view.performClick();
+        });
+        assertEquals(2, mockPresenter.getCountOnClickToDebugItem());
+
+        scenario.onActivity(activity -> {
+            RecyclerView recyclerView = activity.findViewById(R.id.recyclerViewToDebugList);
+            View view = recyclerView.getChildAt(2);
+            view.performClick();
+        });
+        assertEquals(3, mockPresenter.getCountOnClickToDebugItem());
     }
 }

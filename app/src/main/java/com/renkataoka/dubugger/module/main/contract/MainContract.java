@@ -36,6 +36,7 @@ public class MainContract {
         void onCreate();
         void onClickAddButton(String inputContent);
         void onClickDeleteAllMenu();
+        void onClickToDebugItem(int id);
     }
 
     public interface Router extends com.renkataoka.viper.Router {

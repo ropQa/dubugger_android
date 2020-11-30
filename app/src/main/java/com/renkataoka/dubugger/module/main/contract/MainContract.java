@@ -12,6 +12,7 @@ import java.util.List;
 public class MainContract {
     public static final int REQUEST_CODE = 100;//MainActivityからRubberDuckActivityを開始するためのリクエストコード。
     public static final String PARENT_TABLE_ID = BuildConfig.APPLICATION_ID + ".PARENT_TABLE_ID";//親テーブルの主キーを伝えるために使う。
+    public static final String PARENT_TABLE_CONTENT = BuildConfig.APPLICATION_ID + ".PARENT_TABLE_CONTENT";//親テーブルの主キーを伝えるために使う。
 
     private MainContract() {
     }
@@ -38,10 +39,10 @@ public class MainContract {
         void onCreate();
         void onClickAddButton(String inputContent);
         void onClickDeleteAllMenu();
-        void onClickToDebugItem(int id);
+        void onClickToDebugItem(int id, String title);
     }
 
     public interface Router extends com.renkataoka.viper.Router {
-        void startRubberDuckActivity(int id);
+        void startRubberDuckActivity(int id, String title);
     }
 }

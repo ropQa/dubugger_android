@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         adapter = new ToDebugListAdapter() {
             //アイテムのクリックイベントが発生したら、画面切り替えを行う。
             @Override
-            void onItemClick(View view, int id) {
-                presenter.onClickToDebugItem(id);
+            void onItemClick(View view, int id, String title) {
+                presenter.onClickToDebugItem(id, title);
             }
         };
         recyclerView.setAdapter(adapter);

@@ -38,6 +38,9 @@ public class ChatItemsDataManager {
      */
     private List<ChatItems> allItems;
 
+    /**
+     * 親テーブルの主キーを表すinteger
+     */
     private int to_debug_item_key;
 
     /**
@@ -71,8 +74,8 @@ public class ChatItemsDataManager {
      *
      * @return ChatItems内の全てのアイテム
      */
-    public List<ChatItems> getAllItems() {
-        allItems = asyncRead();
+    public List<ChatItems> getAllItems(int key) {
+        allItems = asyncRead(key);
         return allItems;
     }
 
@@ -82,7 +85,7 @@ public class ChatItemsDataManager {
      * @return 読み込み結果
      */
     private List<ChatItems> loadAllChats() {
-        return asyncRead();
+        return asyncRead(to_debug_item_key);
     }
 
     /**
@@ -145,7 +148,7 @@ public class ChatItemsDataManager {
      * @return 読み込み結果
      */
     @UiThread
-    private List<ChatItems> asyncRead() {
+    private List<ChatItems> asyncRead(int key) {
         //ワーカースレッドからdb読み込み結果を受け取る。
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -156,7 +159,7 @@ public class ChatItemsDataManager {
                 }
             }
         };
-        BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, itemsDao, allItems, to_debug_item_key);
+        BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, itemsDao, allItems, key);
         //ワーカースレッドで実行する。
         executorService.submit(backgroundTaskRead);
         return allItems;

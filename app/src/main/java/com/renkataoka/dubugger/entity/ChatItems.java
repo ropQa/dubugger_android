@@ -2,18 +2,24 @@ package com.renkataoka.dubugger.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
+
+import static androidx.room.ForeignKey.CASCADE;
 
 /**
  * ChatItemを定義するEntityクラス。
  * RoomアーキテクチャにおけるRoomエンティティ。
  */
-@Fts4
-@Entity(tableName = "chat_items")   //TODO tableNameを定数として切り分ける。
+@Entity(tableName = "chat_items",
+        foreignKeys = @ForeignKey(entity = ToDebugItems.class,
+                parentColumns = "to_debug_item_id",
+                childColumns = "to_debug_id",
+                onDelete = CASCADE))   //TODO tableNameを定数として切り分ける。
 public class ChatItems {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "rowid") //FTS対応のため
+    @ColumnInfo(name = "chat_item_id")
     public int id;
 
     public int to_debug_id; //関連付けるto_debug_itemsテーブルの主キー

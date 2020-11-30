@@ -63,7 +63,7 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
      */
     @Override
     public void readChatItems() {
-        dataManager.getAllItems();
+        dataManager.getAllItems(to_debug_item_key);
     }
 
     @Override
@@ -72,6 +72,7 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
             ChatItems item = new ChatItems();
             item.setContent(content);
             item.setAttribute(attribute);
+            item.setTo_debug_id(to_debug_item_key);
             dataManager.insert(item);
         }
     }

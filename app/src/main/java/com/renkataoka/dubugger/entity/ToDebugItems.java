@@ -9,11 +9,10 @@ import androidx.room.PrimaryKey;
  * ToDebugItemを定義するEntityクラス。
  * RoomアーキテクチャにおけるRoomエンティティ。
  */
-@Fts4   //全文検索をサポートするSQLite仮想テーブルに対応する
 @Entity(tableName = "to_debug_items")   //TODO tableNameを定数として切り分ける。
 public class ToDebugItems {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "rowid") //FTS対応テーブルのため、列名「rowid」のinteger型を主キーとする。
+    @ColumnInfo(name = "to_debug_item_id")
     public int id;
 
     public String content;  //アイテムの中身

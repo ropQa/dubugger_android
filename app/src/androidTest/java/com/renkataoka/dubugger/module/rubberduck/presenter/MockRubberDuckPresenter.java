@@ -48,4 +48,9 @@ public class MockRubberDuckPresenter implements RubberDuckContract.Presenter {
     public String getAttribute() {
         return attribute;
     }
+
+    @Override
+    public void onCreate(int position) {
+
+    }
 }

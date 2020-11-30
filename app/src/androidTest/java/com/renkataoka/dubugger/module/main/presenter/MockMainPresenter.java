@@ -41,6 +41,11 @@ public class MockMainPresenter implements MainContract.Presenter {
         counter.increment("onClickDeleteAllMenu");
     }
 
+    @Override
+    public void onClickToDebugItem(int position) {
+        
+    }
+
     public int getCountOnClickDeleteAllMenu() {
         return counter.getCount("onClickDeleteAllMenu");
     }

@@ -116,6 +116,30 @@ package com.renkataoka.dubugger.module.main {
   package assembler {
     class MainAssembler
   }
+' Contract内にInterfaceを定義する。
+MainContract +- View
+MainContract +- Interactor
+MainContract +- InteractorCallback
+MainContract +- Presenter
+MainContract +- Router
+
+
+' 各InterfaceはVIPERモジュールのInterfaceを継承する。
+viperView <|-- View
+viperInteractor <|-- Interactor
+viperInteractorCallback <|-- InteractorCallback
+viperPresenter <|-- Presenter
+viperRouter <|--- Router
+
+
+' VIPERモジュール。
+View <|.. MainActivity
+Interactor <|.. MainInteractor
+InteractorCallback <|.. MainPresenter
+Presenter <|.. MainPresenter
+Router <|.. MainRouter
+viperAssembler <|... MainAssembler
+
 }
 @enduml
 ```

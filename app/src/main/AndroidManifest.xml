@@ -20,6 +20,11 @@
         </activity>
         <activity
             android:name=".module.rubberduck.view.RubberDuckActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:parentActivityName=".module.main.view.MainActivity"
+            android:windowSoftInputMode="adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.main.view.MainActivity" />
+        </activity>
     </application>
 </manifest>

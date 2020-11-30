@@ -46,7 +46,7 @@ public class MockMainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void onClickToDebugItem(int id) {
+    public void onClickToDebugItem(int id, String title) {
         counter.increment("onClickToDebugItem");
     }
 

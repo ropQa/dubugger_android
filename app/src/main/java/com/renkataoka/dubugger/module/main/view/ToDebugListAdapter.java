@@ -56,7 +56,8 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
         holder.itemView.setOnClickListener(v -> {
             //クリックされたアイテムのIDを取得する。
             int id = item.toDebugItem.getId();
-            onItemClick(v, id);
+            String title = item.toDebugItem.getContent();
+            onItemClick(v, id, title);
         });
         holder.itemContentView.setText(item.toDebugItem.getContent());
         holder.itemCreatedAtView.setText(dateFormat.format(item.toDebugItem.getCreatedAt()));
@@ -84,6 +85,6 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
      * @param view クリックされたview
      * @param id   viewのID
      */
-    void onItemClick(View view, int id) {
+    void onItemClick(View view, int id, String title) {
     }
 }

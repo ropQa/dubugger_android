@@ -101,9 +101,9 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
      * @param id クリックされたアイテムのID
      */
     @Override
-    public void onClickToDebugItem(int id) {
+    public void onClickToDebugItem(int id, String title) {
         if (router != null) {
-            router.startRubberDuckActivity(id);
+            router.startRubberDuckActivity(id, title);
         }
     }
 

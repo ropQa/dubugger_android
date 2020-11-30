@@ -29,10 +29,11 @@ public class MainRouter implements MainContract.Router {
     }
     
     @Override
-    public void startRubberDuckActivity(int id) {
+    public void startRubberDuckActivity(int id, String title) {
         Intent intent = new Intent();
         intent.setClass(context, RubberDuckActivity.class);
         intent.putExtra(MainContract.PARENT_TABLE_ID, id);
+        intent.putExtra(MainContract.PARENT_TABLE_CONTENT, title);
         if (context instanceof Activity) {
             ((Activity) context).startActivityForResult(intent, MainContract.REQUEST_CODE);
         }

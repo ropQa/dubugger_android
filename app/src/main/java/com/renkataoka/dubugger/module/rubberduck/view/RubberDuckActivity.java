@@ -13,7 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.ToggleButton;
 
 import com.renkataoka.dubugger.R;
 import com.renkataoka.dubugger.entity.ChatItems;
@@ -22,6 +25,7 @@ import com.renkataoka.dubugger.module.rubberduck.assembler.RubberDuckAssembler;
 import com.renkataoka.dubugger.module.rubberduck.contract.RubberDuckContract;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RubberDuckActivity extends AppCompatActivity implements RubberDuckContract.View {
 
@@ -37,18 +41,27 @@ public class RubberDuckActivity extends AppCompatActivity implements RubberDuckC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rubber_duck);
         presenter = beginAssembleModules(this);
-        //メイン画面から受け取ったアイテムIDをpresenterに渡す。
         Intent intent = getIntent();
+        setContent(intent);
+        initLayout();
+    }
+
+    private void setContent(Intent intent) {
+        //選択したアイテムの文言をタイトルとして表示する。
+        String title = intent.getStringExtra(MainContract.PARENT_TABLE_CONTENT);
+        setTitle(title);
+        //メイン画面から受け取ったアイテムIDをpresenterに渡す。
         int id = intent.getIntExtra(MainContract.PARENT_TABLE_ID, 0);
         if (presenter != null) {
             presenter.onCreate(id);
         }
-        initLayout();
     }
 
     private void initLayout() {
         Toolbar toolbar = findViewById(R.id.toolbarRubberDuck);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initRecyclerView();
     }
 

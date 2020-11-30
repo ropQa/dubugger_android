@@ -23,7 +23,7 @@ public class MockChatItemsDataManager extends ChatItemsDataManager {
     }
 
     @Override
-    public List<ChatItems> getAllItems() {
+    public List<ChatItems> getAllItems(int key) {
         counter.increment("getAllItems");
         //テスト用にtoDebugItemsを生成する。
         return new ArrayList<>();

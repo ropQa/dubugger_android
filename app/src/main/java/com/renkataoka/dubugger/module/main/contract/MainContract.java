@@ -1,5 +1,6 @@
 package com.renkataoka.dubugger.module.main.contract;
 
+import com.renkataoka.dubugger.BuildConfig;
 import com.renkataoka.dubugger.entity.ToDebugItems;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 public class MainContract {
     public static final int REQUEST_CODE = 100;//MainActivityからRubberDuckActivityを開始するためのリクエストコード。
+    public static final String PARENT_TABLE_ID = BuildConfig.APPLICATION_ID + ".PARENT_TABLE_ID";//親テーブルの主キーを伝えるために使う。
 
     private MainContract() {
     }
@@ -40,6 +42,6 @@ public class MainContract {
     }
 
     public interface Router extends com.renkataoka.viper.Router {
-        void startRubberDuckActivity();
+        void startRubberDuckActivity(int id);
     }
 }

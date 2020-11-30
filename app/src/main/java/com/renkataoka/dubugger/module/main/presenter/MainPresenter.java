@@ -96,6 +96,18 @@ public class MainPresenter implements MainContract.Presenter, MainContract.Inter
     }
 
     /**
+     * ToDebugItemがクリックされたら、次の画面に遷移する。
+     *
+     * @param id クリックされたアイテムのID
+     */
+    @Override
+    public void onClickToDebugItem(int id) {
+        if (router != null) {
+            router.startRubberDuckActivity(id);
+        }
+    }
+
+    /**
      * 各コンポーネントへの参照を破棄し、破棄させる。
      */
     @Override

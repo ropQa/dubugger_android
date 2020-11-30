@@ -8,10 +8,12 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.dubugger.module.rubberduck.view.RubberDuckActivity;
 
 import org.junit.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -48,10 +50,13 @@ public class MainRouterTest {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(RubberDuckActivity.class.getName(), null, false);
 
-        router.startRubberDuckActivity();
+        router.startRubberDuckActivity(100);
         Activity activity = instrumentation.waitForMonitorWithTimeout(monitor, 3000);
 
         assertNotNull(activity);
+        //正しくID情報が渡されているかを確認。
+        int id = activity.getIntent().getIntExtra(MainContract.PARENT_TABLE_ID, 0);
+        assertEquals(100, id);
     }
 
     /**

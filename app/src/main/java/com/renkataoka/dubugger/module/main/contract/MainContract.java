@@ -1,7 +1,7 @@
 package com.renkataoka.dubugger.module.main.contract;
 
 import com.renkataoka.dubugger.BuildConfig;
-import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChatItems;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class MainContract {
 
     public interface View extends com.renkataoka.viper.View {
         void initRecyclerView();
-        void setToDebugItems(List<ToDebugItems> toDebugItems);
+        void setToDebugItems(List<ToDebugItemsAndChatItems> toDebugItems);
     }
 
     public interface Interactor extends com.renkataoka.viper.Interactor {
@@ -29,7 +29,7 @@ public class MainContract {
     }
 
     public interface InteractorCallback extends com.renkataoka.viper.InteractorCallback {
-        void onReadToDebugItemsCompleted(List<ToDebugItems> toDebugItems);
+        void onReadToDebugItemsCompleted(List<ToDebugItemsAndChatItems> toDebugItems);
         void onAddToDebugItemCompleted();
         void onDeleteToDebugItemCompleted();
     }

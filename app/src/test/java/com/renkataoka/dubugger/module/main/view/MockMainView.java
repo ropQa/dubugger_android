@@ -2,7 +2,7 @@ package com.renkataoka.dubugger.module.main.view;
 
 import android.content.Context;
 
-import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChatItems;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.util.MethodCallCounter;
 import com.renkataoka.viper.Presenter;
@@ -29,7 +29,7 @@ public class MockMainView implements MainContract.View {
     }
 
     @Override
-    public void setToDebugItems(List<ToDebugItems> toDebugItems) {
+    public void setToDebugItems(List<ToDebugItemsAndChatItems> toDebugItems) {
         counter.increment("setToDebugItems");
     }
 

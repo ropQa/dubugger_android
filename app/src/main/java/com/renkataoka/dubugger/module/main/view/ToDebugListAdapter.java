@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.renkataoka.dubugger.R;
-import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChatItems;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
     /**
      * ToDebugItemsデータ
      */
-    private List<ToDebugItems> toDebugItems;
+    private List<ToDebugItemsAndChatItems> toDebugItemsAndChatItems;
 
     /**
      * @param parent   新しいViewが加えられるViewGroup
@@ -52,14 +52,14 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
      */
     @Override
     public void onBindViewHolder(@NonNull ToDebugItemViewHolder holder, int position) {
-        ToDebugItems itemContent = toDebugItems.get(position);
+        ToDebugItemsAndChatItems item = toDebugItemsAndChatItems.get(position);
         holder.itemView.setOnClickListener(v -> {
             //クリックされたアイテムのIDを取得する。
-            int id = itemContent.getId();
+            int id = item.toDebugItem.getId();
             onItemClick(v, id);
         });
-        holder.itemContentView.setText(itemContent.getContent());
-        holder.itemCreatedAtView.setText(dateFormat.format(itemContent.getCreatedAt()));
+        holder.itemContentView.setText(item.toDebugItem.getContent());
+        holder.itemCreatedAtView.setText(dateFormat.format(item.toDebugItem.getCreatedAt()));
     }
 
     /**
@@ -67,14 +67,14 @@ public class ToDebugListAdapter extends RecyclerView.Adapter<ToDebugItemViewHold
      */
     @Override
     public int getItemCount() {
-        if (toDebugItems != null) {
-            return toDebugItems.size();
+        if (toDebugItemsAndChatItems != null) {
+            return toDebugItemsAndChatItems.size();
         }
         return 0;
     }
 
-    public void setToDebugItems(List<ToDebugItems> toDebugItems) {
-        this.toDebugItems = toDebugItems;
+    public void setToDebugItemsAndChatItems(List<ToDebugItemsAndChatItems> toDebugItemsAndChatItems) {
+        this.toDebugItemsAndChatItems = toDebugItemsAndChatItems;
         notifyDataSetChanged();
     }
 

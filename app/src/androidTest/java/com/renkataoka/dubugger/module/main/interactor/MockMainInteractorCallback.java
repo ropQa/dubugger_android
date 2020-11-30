@@ -1,6 +1,6 @@
 package com.renkataoka.dubugger.module.main.interactor;
 
-import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChatItems;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.util.MethodCallCounter;
 
@@ -14,7 +14,7 @@ public class MockMainInteractorCallback implements MainContract.InteractorCallba
     }
 
     @Override
-    public void onReadToDebugItemsCompleted(List<ToDebugItems> toDebugItems) {
+    public void onReadToDebugItemsCompleted(List<ToDebugItemsAndChatItems> toDebugItems) {
         counter.increment("onReadToDebugItems");
     }
 

@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChatItems;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ToDebugItemsDao {
     //TODO べた書きのクエリをどこかに抽出する。
 
     @Query("SELECT to_debug_items.*, `rowid` FROM to_debug_items ORDER BY rowid ASC")
-    public List<ToDebugItems> loadAllItems();
+    public List<ToDebugItemsAndChatItems> loadAllItems();
 
     //IDで指定されたアイテムを取得する。
     @Query("SELECT to_debug_items.*, `rowid` FROM to_debug_items WHERE rowid = :id")

@@ -13,7 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.ToggleButton;
 
 import com.renkataoka.dubugger.R;
 import com.renkataoka.dubugger.entity.ChatItems;
@@ -39,6 +42,11 @@ public class RubberDuckActivity extends AppCompatActivity implements RubberDuckC
         setContentView(R.layout.activity_rubber_duck);
         presenter = beginAssembleModules(this);
         Intent intent = getIntent();
+        setContent(intent);
+        initLayout();
+    }
+
+    private void setContent(Intent intent) {
         //選択したアイテムの文言をタイトルとして表示する。
         String title = intent.getStringExtra(MainContract.PARENT_TABLE_CONTENT);
         setTitle(title);
@@ -47,7 +55,6 @@ public class RubberDuckActivity extends AppCompatActivity implements RubberDuckC
         if (presenter != null) {
             presenter.onCreate(id);
         }
-        initLayout();
     }
 
     private void initLayout() {

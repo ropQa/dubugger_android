@@ -4,4 +4,5 @@
     <string name="buttonAddToDebugItem">Add</string>
     <string name="menu_deleteAll">Delete All</string>
     <string name="hint_makeConversation">Make your conversation.</string>
+    <string name="switch_isDone">done</string>
 </resources>

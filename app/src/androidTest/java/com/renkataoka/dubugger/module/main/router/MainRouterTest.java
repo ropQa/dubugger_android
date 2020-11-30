@@ -50,7 +50,7 @@ public class MainRouterTest {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(RubberDuckActivity.class.getName(), null, false);
 
-        router.startRubberDuckActivity(100);
+        router.startRubberDuckActivity(100, "title");
         Activity activity = instrumentation.waitForMonitorWithTimeout(monitor, 3000);
 
         assertNotNull(activity);

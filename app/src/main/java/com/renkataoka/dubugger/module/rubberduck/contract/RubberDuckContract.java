@@ -20,6 +20,7 @@ public class RubberDuckContract {
     }
 
     public interface Interactor extends com.renkataoka.viper.Interactor {
+        void setParentTableKey(int key);
         void addChatItem(String content, String attribute);
         void deleteChatItem(int id);
         void deleteAllChatItems();

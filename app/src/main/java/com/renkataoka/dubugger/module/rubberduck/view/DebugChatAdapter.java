@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.renkataoka.dubugger.R;
 import com.renkataoka.dubugger.entity.ChatItems;
+import com.renkataoka.dubugger.module.rubberduck.contract.RubberDuckContract;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -20,6 +21,11 @@ import java.util.Locale;
  */
 public class DebugChatAdapter extends RecyclerView.Adapter<DebugChatViewHolder> {
 
+    /**
+     * VIEW_TYPEの判別に用いる定数。
+     */
+    private static final int VIEW_TYPE_RUBBER_DUCK = 1;
+    private static final int VIEW_TYPE_USER = 2;
     /**
      * 日時フォーマット
      */
@@ -38,7 +44,12 @@ public class DebugChatAdapter extends RecyclerView.Adapter<DebugChatViewHolder> 
     @NonNull
     @Override
     public DebugChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.debug_chat, parent, false);
+        View view;
+        if (viewType == VIEW_TYPE_RUBBER_DUCK) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rubberduck_chat, parent, false);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_chat, parent, false);
+        }
         return new DebugChatViewHolder(view);
     }
 
@@ -54,6 +65,16 @@ public class DebugChatAdapter extends RecyclerView.Adapter<DebugChatViewHolder> 
         ChatItems chatContent = chatItems.get(position);
         holder.chatContentView.setText(chatContent.getContent());
         holder.chatCreatedAtView.setText(dateFormat.format(chatContent.getCreatedAt()));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        ChatItems item = chatItems.get(position);
+        if (RubberDuckContract.RUBBER_DUCK.equals(item.getAttribute())) {
+            return VIEW_TYPE_RUBBER_DUCK;
+        } else {
+            return VIEW_TYPE_USER;
+        }
     }
 
     /**

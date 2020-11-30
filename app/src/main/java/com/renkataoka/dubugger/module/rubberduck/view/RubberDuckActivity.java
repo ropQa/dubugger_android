@@ -37,8 +37,11 @@ public class RubberDuckActivity extends AppCompatActivity implements RubberDuckC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rubber_duck);
         presenter = beginAssembleModules(this);
-        //メイン画面から受け取ったアイテムIDをpresenterに渡す。
         Intent intent = getIntent();
+        //選択したアイテムの文言をタイトルとして表示する。
+        String title = intent.getStringExtra(MainContract.PARENT_TABLE_CONTENT);
+        setTitle(title);
+        //メイン画面から受け取ったアイテムIDをpresenterに渡す。
         int id = intent.getIntExtra(MainContract.PARENT_TABLE_ID, 0);
         if (presenter != null) {
             presenter.onCreate(id);

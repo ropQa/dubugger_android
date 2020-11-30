@@ -22,6 +22,7 @@ import com.renkataoka.dubugger.module.rubberduck.assembler.RubberDuckAssembler;
 import com.renkataoka.dubugger.module.rubberduck.contract.RubberDuckContract;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RubberDuckActivity extends AppCompatActivity implements RubberDuckContract.View {
 
@@ -52,6 +53,8 @@ public class RubberDuckActivity extends AppCompatActivity implements RubberDuckC
     private void initLayout() {
         Toolbar toolbar = findViewById(R.id.toolbarRubberDuck);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initRecyclerView();
     }
 

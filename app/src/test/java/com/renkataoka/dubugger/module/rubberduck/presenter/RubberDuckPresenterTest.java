@@ -41,6 +41,13 @@ public class RubberDuckPresenterTest {
     }
 
     @Test
+    public void onCreate() {
+        presenter.onCreate(0);
+
+        assertEquals(1, mockInteractor.getCountSetParentTableKey());
+    }
+
+    @Test
     public void onAddChatItemCompleted() {
         presenter.onAddChatItemCompleted();
 

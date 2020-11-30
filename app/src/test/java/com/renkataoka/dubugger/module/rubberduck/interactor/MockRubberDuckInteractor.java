@@ -15,6 +15,15 @@ public class MockRubberDuckInteractor implements RubberDuckContract.Interactor {
     }
 
     @Override
+    public void setParentTableKey(int key) {
+        counter.increment("setParentTableKey");
+    }
+
+    public int getCountSetParentTableKey() {
+        return counter.getCount("setParentTableKey");
+    }
+
+    @Override
     public void addChatItem(String content, String attribute) {
         if (content.length() != 0 && attribute != null) {
             counter.increment("addChatItem");

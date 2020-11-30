@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.renkataoka.dubugger.datamanager.ChatItemsDataManager;
 import com.renkataoka.dubugger.entity.ChatItems;
-import com.renkataoka.dubugger.module.main.contract.MainContract;
 import com.renkataoka.dubugger.module.rubberduck.contract.RubberDuckContract;
 import com.renkataoka.viper.InteractorCallback;
 
@@ -23,12 +22,17 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
      */
     private ChatItemsDataManager dataManager;
 
+    /**
+     * 親テーブルの主キーを示すinteger
+     */
+    private int to_debug_item_key;
+
     public RubberDuckInteractor(Context context) {
-        dataManager = createDataManager(context);
+        dataManager = createDataManager(context, to_debug_item_key);
     }
 
-    ChatItemsDataManager createDataManager(Context context) {
-        return new ChatItemsDataManager(context);
+    ChatItemsDataManager createDataManager(Context context, int key) {
+        return new ChatItemsDataManager(context, key);
     }
 
     @Override
@@ -45,11 +49,21 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
     }
 
     /**
+     * 親テーブルの主キーを登録する。
+     *
+     * @param key 対応する親テーブルの主キー
+     */
+    @Override
+    public void setParentTableKey(int key) {
+        to_debug_item_key = key;
+    }
+
+    /**
      * chat_itemsテーブルを読み込む。
      */
     @Override
     public void readChatItems() {
-        dataManager.getAllItems();
+        dataManager.getAllItems(to_debug_item_key);
     }
 
     @Override
@@ -58,6 +72,7 @@ public class RubberDuckInteractor implements RubberDuckContract.Interactor {
             ChatItems item = new ChatItems();
             item.setContent(content);
             item.setAttribute(attribute);
+            item.setTo_debug_id(to_debug_item_key);
             dataManager.insert(item);
         }
     }

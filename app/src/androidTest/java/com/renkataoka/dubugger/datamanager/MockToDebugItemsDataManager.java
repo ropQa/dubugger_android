@@ -3,6 +3,7 @@ package com.renkataoka.dubugger.datamanager;
 import android.content.Context;
 
 import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChatItems;
 import com.renkataoka.util.MethodCallCounter;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class MockToDebugItemsDataManager extends ToDebugItemsDataManager {
     }
 
     @Override
-    public List<ToDebugItems> getAllItems() {
+    public List<ToDebugItemsAndChatItems> getAllItems() {
         counter.increment("getAllItems");
         //テスト用にtoDebugItemsを生成する。
         return new ArrayList<>();

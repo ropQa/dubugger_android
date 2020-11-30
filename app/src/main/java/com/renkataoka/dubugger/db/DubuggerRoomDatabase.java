@@ -14,7 +14,7 @@ import com.renkataoka.dubugger.entity.ToDebugItems;
 /**
  * RoomアーキテクチャにおけるRoomデータベース。
  */
-@Database(entities = {ToDebugItems.class, ChatItems.class}, version = 1, exportSchema = true)
+@Database(entities = {ToDebugItems.class, ChatItems.class}, version = 1, exportSchema = false)
 //TODO exportSchemaでバージョン管理するメリット
 public abstract class DubuggerRoomDatabase extends RoomDatabase {
 

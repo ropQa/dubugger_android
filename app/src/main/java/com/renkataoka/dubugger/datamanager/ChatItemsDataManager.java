@@ -39,6 +39,11 @@ public class ChatItemsDataManager {
     private List<ChatItems> allItems;
 
     /**
+     * 親テーブルの主キーを表すinteger
+     */
+    private int to_debug_item_key;
+
+    /**
      * 処理完了を通知するcallbackクラス。
      */
     private RubberDuckContract.InteractorCallback callback;
@@ -48,9 +53,10 @@ public class ChatItemsDataManager {
      */
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    public ChatItemsDataManager(Context context) {
+    public ChatItemsDataManager(Context context, int to_debug_item_key) {
         DubuggerRoomDatabase db = DubuggerRoomDatabase.getDatabase(context);
         itemsDao = db.chatItemsDao();
+        this.to_debug_item_key = to_debug_item_key;
         allItems = loadAllChats();
     }
 
@@ -68,8 +74,8 @@ public class ChatItemsDataManager {
      *
      * @return ChatItems内の全てのアイテム
      */
-    public List<ChatItems> getAllItems() {
-        allItems = asyncRead();
+    public List<ChatItems> getAllItems(int key) {
+        allItems = asyncRead(key);
         return allItems;
     }
 
@@ -79,7 +85,7 @@ public class ChatItemsDataManager {
      * @return 読み込み結果
      */
     private List<ChatItems> loadAllChats() {
-        return asyncRead();
+        return asyncRead(to_debug_item_key);
     }
 
     /**
@@ -142,7 +148,7 @@ public class ChatItemsDataManager {
      * @return 読み込み結果
      */
     @UiThread
-    private List<ChatItems> asyncRead() {
+    private List<ChatItems> asyncRead(int key) {
         //ワーカースレッドからdb読み込み結果を受け取る。
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -153,7 +159,7 @@ public class ChatItemsDataManager {
                 }
             }
         };
-        BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, itemsDao, allItems);
+        BackgroundTaskRead backgroundTaskRead = new BackgroundTaskRead(handler, itemsDao, allItems, key);
         //ワーカースレッドで実行する。
         executorService.submit(backgroundTaskRead);
         return allItems;
@@ -205,18 +211,20 @@ public class ChatItemsDataManager {
         private final Handler handler;
         private ChatItemsDao itemsDao;
         private List<ChatItems> chatItems;
+        private int to_debug_item_key;
 
-        BackgroundTaskRead(Handler handler, ChatItemsDao itemsDao, List<ChatItems> chatItems) {
+        BackgroundTaskRead(Handler handler, ChatItemsDao itemsDao, List<ChatItems> chatItems, int to_debug_item_key) {
             this.handler = handler;
             this.itemsDao = itemsDao;
             this.chatItems = chatItems;
+            this.to_debug_item_key = to_debug_item_key;
         }
 
         @WorkerThread
         @Override
         public void run() {
             //非同期処理を開始する。
-            chatItems = itemsDao.loadAllChats();
+            chatItems = itemsDao.loadAllChats(to_debug_item_key);
             handler.sendMessage(handler.obtainMessage(READ, chatItems));
         }
     }

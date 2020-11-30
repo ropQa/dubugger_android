@@ -19,7 +19,7 @@ public class MockChatItemsDataManager extends ChatItemsDataManager {
     }
 
     public MockChatItemsDataManager(Context context) {
-        super(context);
+        super(context, 0);
     }
 
     @Override

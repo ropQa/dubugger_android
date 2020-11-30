@@ -30,6 +30,14 @@ public class RubberDuckPresenter implements RubberDuckContract.Presenter, Rubber
         this.router = router;
     }
 
+    @Override
+    public void onCreate(int id) {
+        if (interactor != null) {
+            interactor.setParentTableKey(id);
+            interactor.readChatItems();
+        }
+    }
+
     /**
      * アイテム追加が完了したら、再度dbを読み込む。
      */

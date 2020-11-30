@@ -15,7 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.renkataoka.dubugger.R;
-import com.renkataoka.dubugger.entity.ToDebugItems;
+import com.renkataoka.dubugger.entity.ToDebugItemsAndChatItems;
 import com.renkataoka.dubugger.module.main.assembler.MainAssembler;
 import com.renkataoka.dubugger.module.main.contract.MainContract;
 
@@ -72,19 +72,25 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void initRecyclerView() {
         recyclerView = findViewById(R.id.recyclerViewToDebugList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ToDebugListAdapter();
+        adapter = new ToDebugListAdapter() {
+            //アイテムのクリックイベントが発生したら、画面切り替えを行う。
+            @Override
+            void onItemClick(View view, int id) {
+                presenter.onClickToDebugItem(id);
+            }
+        };
         recyclerView.setAdapter(adapter);
     }
 
     /**
      * recyclerViewのアダプターにアイテムをセットする。
      *
-     * @param toDebugItems dbから取得したアイテム
+     * @param toDebugItemsAndChatItems dbから取得したアイテム
      */
     @Override
-    public void setToDebugItems(List<ToDebugItems> toDebugItems) {
+    public void setToDebugItems(List<ToDebugItemsAndChatItems> toDebugItemsAndChatItems) {
         if (adapter instanceof ToDebugListAdapter) {
-            ((ToDebugListAdapter) adapter).setToDebugItems(toDebugItems);
+            ((ToDebugListAdapter) adapter).setToDebugItemsAndChatItems(toDebugItemsAndChatItems);
         }
     }
 

@@ -7,4 +7,5 @@
     <color name="colorRubberDuckAccent">#4C663A</color>
     <color name="colorBackground">#B1D7E4</color>
     <color name="colorContent">#637880</color>
+    <color name="colorIcon">#ffd75e</color>
 </resources>
